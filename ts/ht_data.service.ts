@@ -265,7 +265,7 @@ export class HT_DataService {
             }
 
             if ( !applicationUuid ) {
-                applicationUuid = this.getData(username).applicationUuid;
+                applicationUuid = this.getData(username, true).applicationUuid;
             }
             if ( applicationUuid == null ) {
                 this.setApplicationUuid(undefined);

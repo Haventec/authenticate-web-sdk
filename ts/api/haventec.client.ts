@@ -8,6 +8,7 @@ export class HaventecAuthenticateClient {
 
     private currentUser: string;
     private domain: string;
+    private applicationUuid: string;
     private dataService: HT_DataService;
     private deviceService: HT_DeviceService;
     public http: HT_HttpService;
@@ -21,8 +22,13 @@ export class HaventecAuthenticateClient {
         this.dataService.normaliseStorageService();
     }
 
+    public init(applicationUuid: string, domain: string) {
+        this.applicationUuid = applicationUuid;
+        this.domain = domain;
+    }
+
     public initialize(domain: string, applicationUuid?: string) {
-        this.dataService.setApplicationUuid(applicationUuid);
+        this.applicationUuid = applicationUuid;
         this.domain = domain;
     }
 
@@ -182,6 +188,7 @@ export class HaventecAuthenticateClient {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/self-service/user');
 
         this.setCurrentUser(username);
+        this.dataService.setApplicationUuid(this.applicationUuid);
 
         let requestBody = {
             email: email,
