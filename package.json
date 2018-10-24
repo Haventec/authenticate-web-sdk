@@ -1,0 +1,40 @@
+{
+  "name": "@haventec/authenticate-client-js",
+  "version": "1.2.0",
+  "description": "Haventec Authenticate Client JS",
+  "keywords": [],
+  "author": "Haventec <info@haventec.com>",
+  "repository": "",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "contributors": [
+    {
+      "name": "Haventec"
+    }
+  ],
+  "bugs": {
+    "url": "",
+    "email": "info@haventec.com"
+  },
+  "dependencies": {
+    "@haventec/sjcl512": "1.0.0",
+    "@types/node": "^8.5.2",
+    "atob": "^2.0.3",
+    "superagent": "^3.5.1"
+  },
+  "devDependencies": {
+    "core-js": "^2.4.1",
+    "superagent-mock": "^3.3.0",
+    "tapbuffer": "^1.0.9",
+    "tapbundle": "^1.0.5",
+    "typescript": "^2.3.2"
+  },
+  "peerDependencies": {},
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": ""
+    }
+  ]
+}

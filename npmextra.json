@@ -1,0 +1,13 @@
+{
+  "mode":"custom",
+  "test":true,
+  "npmts":{
+    "ts":{
+      "./ts/*.ts":"./"
+    },
+    "tsOptions":{
+      "declaration":false,
+      "target":"ES5"
+    }
+  }
+}
