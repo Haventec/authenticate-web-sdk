@@ -36,6 +36,9 @@ export class HaventecAuthenticateClient {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/activate/device');
 
         this.setCurrentUser(username);
+        if ( this.applicationUuid ) {
+            this.dataService.setApplicationUuid(this.applicationUuid);
+        }
 
         let requestBody = {
             activationToken: activationToken,
@@ -53,6 +56,9 @@ export class HaventecAuthenticateClient {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/device');
 
         this.setCurrentUser(username);
+        if ( this.applicationUuid ) {
+            this.dataService.setApplicationUuid(this.applicationUuid);
+        }
 
         if(!deviceName){
             deviceName = this.deviceService.getDeviceName();
@@ -72,6 +78,9 @@ export class HaventecAuthenticateClient {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/activate/user');
 
         this.setCurrentUser(username);
+        if ( this.applicationUuid ) {
+            this.dataService.setApplicationUuid(this.applicationUuid);
+        }
 
         if(!deviceName){
             deviceName = this.deviceService.getDeviceName();
@@ -116,6 +125,9 @@ export class HaventecAuthenticateClient {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/forgot-pin');
 
         this.setCurrentUser(username);
+        if ( this.applicationUuid ) {
+            this.dataService.setApplicationUuid(this.applicationUuid);
+        }
 
         let requestBody = {
             deviceUuid: this.dataService.getDeviceUuid(),
@@ -171,6 +183,9 @@ export class HaventecAuthenticateClient {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/reset-pin');
 
         this.setCurrentUser(username);
+        if ( this.applicationUuid ) {
+            this.dataService.setApplicationUuid(this.applicationUuid);
+        }
 
         let requestBody = {
             deviceUuid: this.dataService.getDeviceUuid(),
@@ -188,7 +203,9 @@ export class HaventecAuthenticateClient {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/self-service/user');
 
         this.setCurrentUser(username);
-        this.dataService.setApplicationUuid(this.applicationUuid);
+        if ( this.applicationUuid ) {
+            this.dataService.setApplicationUuid(this.applicationUuid);
+        }
 
         let requestBody = {
             email: email,
