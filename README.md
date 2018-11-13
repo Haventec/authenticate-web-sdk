@@ -103,7 +103,7 @@ initialize(domain: string, applicationUuid?: string)
 Activate the user's recently added device.
 
 ```javascript
-activateDevice(username: string, pin: string, activationToken: string, urlOverwrite?:string)
+activateDevice(username: string, pin: string, activationToken: string, customHeaders?: any, urlOverwrite?:string)
 ```
 
 | Parameter | Required | Description |
@@ -118,7 +118,7 @@ activateDevice(username: string, pin: string, activationToken: string, urlOverwr
 Add the user's current device.
 
 ```javascript
-addDevice(username: string, deviceName?: string, urlOverwrite?:string)
+addDevice(username: string, deviceName?: string, customHeaders?: any, urlOverwrite?:string)
 ```
 
 | Parameter | Required | Description |
@@ -130,7 +130,7 @@ addDevice(username: string, deviceName?: string, urlOverwrite?:string)
 ### Activate user
 
 ```javascript
-activateUser(username:string, activationToken:string, pin:string, urlOverwrite?:string, deviceName?:string)
+activateUser(username:string, activationToken:string, pin:string, customHeaders?: any, urlOverwrite?:string, deviceName?:string)
 ```
 
 | Parameter | Required | Description |
@@ -143,7 +143,7 @@ activateUser(username:string, activationToken:string, pin:string, urlOverwrite?:
 ### Delete device
 
 ```javascript
-deleteDevice(deviceUuid: string, urlOverwrite?:string)
+deleteDevice(deviceUuid: string, customHeaders?: any, urlOverwrite?:string)
 ```
 
 | Parameter | Required | Description |
@@ -154,7 +154,7 @@ deleteDevice(deviceUuid: string, urlOverwrite?:string)
 ### Lock device
 
 ```javascript
-lockDevice(deviceUuid: string, urlOverwrite?:string)
+lockDevice(deviceUuid: string, customHeaders?: any, urlOverwrite?:string)
 ```
 
 | Parameter | Required | Description |
@@ -165,7 +165,7 @@ lockDevice(deviceUuid: string, urlOverwrite?:string)
 ### Unlock device
 
 ```javascript
-unlockDevice(deviceUuid: string, urlOverwrite?:string)
+unlockDevice(deviceUuid: string, customHeaders?: any, urlOverwrite?:string)
 ```
 
 | Parameter | Required | Description |
@@ -178,7 +178,7 @@ unlockDevice(deviceUuid: string, urlOverwrite?:string)
 Initiate a Forgot PIN request.
 
 ```javascript
-forgotPin(username: string, urlOverwrite?:string)
+forgotPin(username: string, customHeaders?: any, urlOverwrite?:string)
 ```
 | Parameter | Required | Description |
 | ----- | ----- | ----- |
@@ -188,7 +188,7 @@ forgotPin(username: string, urlOverwrite?:string)
 ### Get the current user details
 
 ```javascript
-getCurrentUserDetails(urlOverwrite?:string)
+getCurrentUserDetails(customHeaders?: any, urlOverwrite?:string)
 ```
 
 | Parameter | Required | Description |
@@ -201,7 +201,7 @@ getCurrentUserDetails(urlOverwrite?:string)
 Get a list of device for a user.
 
 ```javascript
-getUserDevices(userUuid: string, urlOverwrite?:string)
+getUserDevices(userUuid: string, customHeaders?: any, urlOverwrite?:string)
 ```
 
 | Parameter | Required | Description |
@@ -213,7 +213,7 @@ getUserDevices(userUuid: string, urlOverwrite?:string)
 ### Login
 
 ```javascript
-login(username: string, pin: string, urlOverwrite?:string)
+login(username: string, pin: string, customHeaders?: any, urlOverwrite?:string)
 ```
 
 | Parameter | Required | Description |
@@ -226,7 +226,7 @@ login(username: string, pin: string, urlOverwrite?:string)
 ### Logout
 
 ```javascript
-logout(urlOverwrite?:string)
+logout(customHeaders?: any, urlOverwrite?:string)
 ```
 | Parameter | Required | Description |
 | ----- | ----- | ----- |
@@ -237,7 +237,7 @@ logout(urlOverwrite?:string)
 Reset a PIN for a device. Each device has an independent PIN, resetting a PIN does not reset the user PIN across all of there devices, it only resets the PIN on the device that request the reset PIN. 
 
 ```javascript
-resetPin(username: string, resetPinToken: string, pin:string, urlOverwrite?:string)
+resetPin(username: string, resetPinToken: string, pin:string, customHeaders?: any, urlOverwrite?:string)
 ```
 | Parameter | Required | Description |
 | ----- | ----- | ----- |
@@ -250,7 +250,7 @@ resetPin(username: string, resetPinToken: string, pin:string, urlOverwrite?:stri
 ### Sign up a user
 
 ```javascript
-signUp(username: string, email: string, urlOverwrite?:string, mobileNumber?: string)
+signUp(username: string, email: string, customHeaders?: any, urlOverwrite?:string, mobileNumber?: string)
 ```
 | Parameter | Required | Description |
 | ----- | ----- | ----- |

@@ -32,7 +32,7 @@ export class HaventecAuthenticateClient {
         this.domain = domain;
     }
 
-    public activateDevice(username: string, pin: string, activationToken: string, urlOverwrite?:string) {
+    public activateDevice(username: string, pin: string, activationToken: string, customHeaders?: any, urlOverwrite?:string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/activate/device');
 
         this.setCurrentUser(username);
@@ -49,10 +49,10 @@ export class HaventecAuthenticateClient {
 
         this.setApplicationUuidParameter(requestBody);
 
-        return this.postNoAuth(url, requestBody);
+        return this.postNoAuth(url, requestBody, customHeaders);
     }
 
-    public addDevice(username: string, deviceName?: string, urlOverwrite?:string) {
+    public addDevice(username: string, deviceName?: string, customHeaders?: any, urlOverwrite?:string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/device');
 
         this.setCurrentUser(username);
@@ -71,10 +71,10 @@ export class HaventecAuthenticateClient {
 
         this.setApplicationUuidParameter(requestBody);
 
-        return this.postNoAuth(url, requestBody);
+        return this.postNoAuth(url, requestBody, customHeaders);
     }
 
-    public activateUser(username:string, activationToken:string, pin:string, urlOverwrite?:string, deviceName?:string) {
+    public activateUser(username:string, activationToken:string, pin:string, customHeaders?: any, urlOverwrite?:string, deviceName?:string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/activate/user');
 
         this.setCurrentUser(username);
@@ -95,33 +95,33 @@ export class HaventecAuthenticateClient {
 
         this.setApplicationUuidParameter(requestBody);
 
-        return this.postNoAuth(url, requestBody);
+        return this.postNoAuth(url, requestBody, customHeaders);
     }
 
-    public deleteDevice(deviceUuid: string, urlOverwrite?:string) {
+    public deleteDevice(deviceUuid: string, customHeaders?: any, urlOverwrite?:string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/device/' + deviceUuid);
-        return this.delete(url);
+        return this.delete(url, customHeaders);
     }
 
-    public lockDevice(deviceUuid: string, urlOverwrite?:string) {
+    public lockDevice(deviceUuid: string, customHeaders?: any, urlOverwrite?:string) {
         let requestBody = {
             "locked": true
         };
 
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/device/' + deviceUuid);
-        return this.patch(url, requestBody);
+        return this.patch(url, requestBody, customHeaders);
     }
 
-    public unlockDevice(deviceUuid: string, urlOverwrite?:string) {
+    public unlockDevice(deviceUuid: string, customHeaders?: any, urlOverwrite?:string) {
         let requestBody = {
             "locked": false
         };
 
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/device/' + deviceUuid);
-        return this.patch(url, requestBody);
+        return this.patch(url, requestBody, customHeaders);
     }
 
-    public forgotPin(username: string, urlOverwrite?:string) {
+    public forgotPin(username: string, customHeaders?: any, urlOverwrite?:string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/forgot-pin');
 
         this.setCurrentUser(username);
@@ -136,20 +136,20 @@ export class HaventecAuthenticateClient {
 
         this.setApplicationUuidParameter(requestBody);
 
-        return this.postNoAuth(url, requestBody);
+        return this.postNoAuth(url, requestBody, customHeaders);
     }
 
-    public getCurrentUserDetails(urlOverwrite?:string) {
+    public getCurrentUserDetails(customHeaders?: any, urlOverwrite?:string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/user/current');
-        return this.http.get(url, this.getAccessToken())
+        return this.http.get(url, this.getAccessToken(), customHeaders)
     }
 
-    public getUserDevices(userUuid: string, urlOverwrite?:string) {
+    public getUserDevices(userUuid: string, customHeaders?: any, urlOverwrite?:string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/user/' + userUuid + '/device');
-        return this.http.get(url, this.getAccessToken())
+        return this.http.get(url, this.getAccessToken(), customHeaders)
     }
 
-    public login(username: string, pin: string, urlOverwrite?:string) {
+    public login(username: string, pin: string, customHeaders?: any, urlOverwrite?:string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/login');
 
         this.setCurrentUser(username);
@@ -163,13 +163,13 @@ export class HaventecAuthenticateClient {
 
         this.setApplicationUuidParameter(requestBody);
 
-        return this.postNoAuth(url, requestBody);
+        return this.postNoAuth(url, requestBody, customHeaders);
     }
 
-    public logout(urlOverwrite?:string) {
+    public logout(customHeaders?: any, urlOverwrite?:string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/logout');
         return new Promise((resolve, reject) => {
-            this.delete(url).then(
+            this.delete(url, customHeaders).then(
                 data => {
                     this.dataService.invalidateToken();
                     resolve(data);
@@ -179,7 +179,7 @@ export class HaventecAuthenticateClient {
         });
     }
 
-    public resetPin(username: string, resetPinToken: string, pin:string, urlOverwrite?:string) {
+    public resetPin(username: string, resetPinToken: string, pin:string, customHeaders?: any, urlOverwrite?:string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/reset-pin');
 
         this.setCurrentUser(username);
@@ -196,10 +196,10 @@ export class HaventecAuthenticateClient {
 
         this.setApplicationUuidParameter(requestBody);
 
-        return this.postNoAuth(url, requestBody);
+        return this.postNoAuth(url, requestBody, customHeaders);
     }
 
-    public signUp(username: string, email: string, urlOverwrite?:string, mobileNumber?: string) {
+    public signUp(username: string, email: string, customHeaders?: any, urlOverwrite?:string, mobileNumber?: string) {
         let url = (urlOverwrite ? urlOverwrite : this.domain + '/self-service/user');
 
         this.setCurrentUser(username);
@@ -215,7 +215,7 @@ export class HaventecAuthenticateClient {
 
         this.setApplicationUuidParameter(requestBody);
 
-        return this.postNoAuth(url, requestBody);
+        return this.postNoAuth(url, requestBody, customHeaders);
     }
 
     public getHashPin(pin: string): string {
@@ -281,9 +281,9 @@ export class HaventecAuthenticateClient {
     }
 
 
-    private patch(url: string, data: any) {
+    private patch(url: string, data: any, customHeaders?: any) {
         return new Promise((resolve, reject) => {
-            this.http.patch(url, data, this.getAccessToken()).then(
+            this.http.patch(url, data, this.getAccessToken(), customHeaders).then(
                 data => {
                     this.dataService.updateDataFromResponse(data);
                     resolve(data);
@@ -293,9 +293,9 @@ export class HaventecAuthenticateClient {
         });
     }
 
-    private post(url: string, data: any) {
+    private post(url: string, data: any, customHeaders?: any) {
         return new Promise((resolve, reject) => {
-            this.http.post(url, data, this.getAccessToken()).then(
+            this.http.post(url, data, this.getAccessToken(), customHeaders).then(
                 data => {
                     this.dataService.updateDataFromResponse(data);
                     resolve(data);
@@ -305,9 +305,9 @@ export class HaventecAuthenticateClient {
         });
     }
 
-    private postNoAuth(url: string, data: any) {
+    private postNoAuth(url: string, data: any, customHeaders?: any) {
         return new Promise((resolve, reject) => {
-            this.http.postNoAuth(url, data).then(
+            this.http.postNoAuth(url, data, customHeaders).then(
                 data => {
                     this.dataService.updateDataFromResponse(data);
                     resolve(data);
@@ -317,9 +317,9 @@ export class HaventecAuthenticateClient {
         });
     }
 
-    private delete(url: string) {
+    private delete(url: string, customHeaders?: any) {
         return new Promise((resolve, reject) => {
-            this.http.delete(url, this.getAccessToken()).then(
+            this.http.delete(url, this.getAccessToken(), customHeaders).then(
                 data => {
                     this.dataService.updateDataFromResponse(data);
                     resolve(data);

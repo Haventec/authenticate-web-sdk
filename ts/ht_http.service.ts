@@ -5,14 +5,17 @@ export class HT_HttpService {
     constructor() {
     }
 
-    public get(url: string, access_token: string) {
+    public get(url: string, access_token: string, customHeaders?: any) {
 
         let self: any = this;
 
+        const headers = customHeaders ? customHeaders : {};
+        headers['Authorization'] = 'Bearer ' + access_token;
+        headers['Content-type'] = 'application/json';
+
         return new Promise((resolve, reject) => {
             request.get(url)
-                .set("Authorization", "Bearer " + access_token)
-                .set("Content-type", "application/json")
+                .set(headers)
                 .then((response) => {
                     if ( self.validateResponse(response.body) )  {
                         return resolve(response.body);
@@ -23,13 +26,16 @@ export class HT_HttpService {
         });
     }
 
-    public getNoAuth(url: string) {
+    public getNoAuth(url: string, customHeaders?: any) {
 
         let self: any = this;
 
+        const headers = customHeaders ? customHeaders : {};
+        headers['Content-type'] = 'application/json';
+
         return new Promise((resolve, reject) => {
             request.get(url)
-                .set("Content-type", "application/json")
+                .set(headers)
                 .then((response) => {
                     if ( self.validateResponse(response.body) )  {
                         return resolve(response.body);
@@ -42,14 +48,17 @@ export class HT_HttpService {
         });
     }
 
-    public patch(url: string, data: any, access_token: string) {
+    public patch(url: string, data: any, access_token: string, customHeaders?: any) {
 
         let self: any = this;
+
+        const headers = customHeaders ? customHeaders : {};
+        headers['Authorization'] = 'Bearer ' + access_token;
+        headers['Content-type'] = 'application/json';
 
         return new Promise((resolve, reject) => {
             request.patch(url)
-                .set("Authorization", "Bearer " + access_token)
-                .set("Content-type", "application/json")
+                .set(headers)
                 .send(data)
                 .then((response) => {
                     if ( self.validateResponse(response.body) )  {
@@ -62,14 +71,17 @@ export class HT_HttpService {
     }
 
 
-    public post(url: string, data: any, access_token: string) {
+    public post(url: string, data: any, access_token: string, customHeaders?: any) {
 
         let self: any = this;
+
+        const headers = customHeaders ? customHeaders : {};
+        headers['Authorization'] = 'Bearer ' + access_token;
+        headers['Content-type'] = 'application/json';
 
         return new Promise((resolve, reject) => {
             request.post(url)
-                .set("Authorization", "Bearer " + access_token)
-                .set("Content-type", "application/json")
+                .set(headers)
                 .send(data)
                 .then((response) => {
                     if ( self.validateResponse(response.body) )  {
@@ -81,14 +93,17 @@ export class HT_HttpService {
         });
     }
 
-    public put(url: string, data: any, access_token: string) {
+    public put(url: string, data: any, access_token: string, customHeaders?: any) {
 
         let self: any = this;
+
+        const headers = customHeaders ? customHeaders : {};
+        headers['Authorization'] = 'Bearer ' + access_token;
+        headers['Content-type'] = 'application/json';
 
         return new Promise((resolve, reject) => {
             request.put(url)
-                .set("Authorization", "Bearer " + access_token)
-                .set("Content-type", "application/json")
+                .set(headers)
                 .send(data)
                 .then((response) => {
                     if ( self.validateResponse(response.body) )  {
@@ -100,13 +115,16 @@ export class HT_HttpService {
         });
     }
 
-    public postNoAuth(url: string, data: any) {
+    public postNoAuth(url: string, data: any, customHeaders?: any) {
 
         let self: any = this;
 
+        const headers = customHeaders ? customHeaders : {};
+        headers['Content-type'] = 'application/json';
+
         return new Promise((resolve, reject) => {
             request.post(url)
-                .set("Content-type", "application/json")
+                .set(headers)
                 .send(data)
                 .then((response) => {
                     if ( self.validateResponse(response.body) )  {
@@ -120,14 +138,17 @@ export class HT_HttpService {
         });
     }
 
-    public delete(url: string, access_token: string) {
+    public delete(url: string, access_token: string, customHeaders?: any) {
 
         let self: any = this;
 
+        const headers = customHeaders ? customHeaders : {};
+        headers['Authorization'] = 'Bearer ' + access_token;
+        headers['Content-type'] = 'application/json';
+
         return new Promise((resolve, reject) => {
             request.delete(url)
-                .set("Authorization", "Bearer " + access_token)
-                .set("Content-type", "application/json")
+                .set(headers)
                 .then((response) => {
                     if ( self.validateResponse(response.body) )  {
                         return resolve(response.body);
