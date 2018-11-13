@@ -111,7 +111,7 @@ activateDevice(username: string, pin: string, activationToken: string, customHea
 | username | Yes | The user's name, can be a real name, alias or email|
 | pin | Yes | The user's PIN |
 | activationToken | Yes | The activation token send to the user in an out of band channel (email, push notification). This is controlled by the backend |
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 ### Add device
@@ -126,7 +126,7 @@ addDevice(username: string, deviceName?: string, customHeaders?: any, urlOverwri
 | ----- | ----- | ----- |
 | username | Yes | The user's name, can be a real name, alias or email|
 | deviceName | No | The name of the device being registered. If undefienced the client with auto generate the device name based on the OS, browser and hardware |
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain |
 
 ### Activate user
@@ -140,7 +140,7 @@ activateUser(username:string, activationToken:string, pin:string, customHeaders?
 | username | Yes | The user's name, can be a real name, alias or email|
 | activationToken | Yes | The activation token sent to the user in an out of band channel (email, push notification). This is controlled by the backend |
 | pin | Yes | The user's PIN |
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 ### Delete device
@@ -152,7 +152,7 @@ deleteDevice(deviceUuid: string, customHeaders?: any, urlOverwrite?:string)
 | Parameter | Required | Description |
 | ----- | ----- | ----- |
 | deviceUuid | Yes | The uuid of the device you want to delete. The user must be the owner of the device to be able to delete it.|
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 ### Lock device
@@ -164,7 +164,7 @@ lockDevice(deviceUuid: string, customHeaders?: any, urlOverwrite?:string)
 | Parameter | Required | Description |
 | ----- | ----- | ----- |
 | deviceUuid | Yes | The uuid of the device you want to lock. The user must be the owner of the device to be able to lock it.|
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the deleteDevice backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 ### Unlock device
@@ -176,7 +176,7 @@ unlockDevice(deviceUuid: string, customHeaders?: any, urlOverwrite?:string)
 | Parameter | Required | Description |
 | ----- | ----- | ----- |
 | deviceUuid | Yes | The uuid of the device you want to unlock. The user must be the owner of the device to be able to unlock it.|
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 ### Forgot PIN
@@ -189,7 +189,7 @@ forgotPin(username: string, customHeaders?: any, urlOverwrite?:string)
 | Parameter | Required | Description |
 | ----- | ----- | ----- |
 | username | Yes | The user's username |
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 ### Get the current user details
@@ -200,7 +200,7 @@ getCurrentUserDetails(customHeaders?: any, urlOverwrite?:string)
 
 | Parameter | Required | Description |
 | ----- | ----- | ----- |
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 
@@ -215,7 +215,7 @@ getUserDevices(userUuid: string, customHeaders?: any, urlOverwrite?:string)
 | Parameter | Required | Description |
 | ----- | ----- | ----- |
 | userUuid | Yes | The user's uuid |
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the deleteDevice backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 
@@ -229,7 +229,7 @@ login(username: string, pin: string, customHeaders?: any, urlOverwrite?:string)
 | ----- | ----- | ----- |
 | username | Yes | The user's username |
 | pin | Yes | The user's PIN |
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 
@@ -240,7 +240,7 @@ logout(customHeaders?: any, urlOverwrite?:string)
 ```
 | Parameter | Required | Description |
 | ----- | ----- | ----- |
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the logout backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 ### Reset PIN
@@ -255,7 +255,7 @@ resetPin(username: string, resetPinToken: string, pin:string, customHeaders?: an
 | username | Yes | The user's username |
 | resetPinToken | Yes | The reset PIN token sent to the user in an out of band channel (email, push notification). This is controlled by the backend |
 | pin | Yes | The user's PIN |
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the login backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 
 
@@ -268,7 +268,7 @@ signUp(username: string, email: string, customHeaders?: any, urlOverwrite?:strin
 | ----- | ----- | ----- |
 | username | Yes | The user's username |
 | email | Yes | The user's email |
-| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object|
+| customHeaders | No | Send specific custom HTTP headers along with the request, in a key-value Javascript object. E.g. {'X-My-Custom-Header': 'xxxx'}|
 | urlOverwrite | No | Overwrite the login backend path URL, example '/my-custom-backend-path'. Note this overwrites the URL path not the domain|
 | mobileNumber | No | The user's mobile number |
 
