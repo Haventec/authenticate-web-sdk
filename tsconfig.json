@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5", 
+    "module": "commonjs", 
+    "lib": [
+      "es5",
+      "dom"
+    ], 
+    "declaration": true,
+    "sourceMap": true, 
+    "outDir": "./dist",
+    "strict": false,
+    "moduleResolution": "node",
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types"
+    ],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "./src/test/**/*",
+    "./dist/**/*"
+  ]
+}
