@@ -1,5 +1,5 @@
-import {HT_TokenService} from '../helpers/ht_token.service';
-import { HT_Error, ErrorCode, ErrorMessage } from '../model/error';
+import { HT_TokenService } from '../helpers/ht_token.service';
+import { ErrorMessage } from '../model/error';
 
 describe("HT_TokenService", function () {
     it("ignores and returns undefined for undefined/null inputs", function () {

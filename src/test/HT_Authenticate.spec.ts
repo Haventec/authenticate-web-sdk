@@ -1,12 +1,7 @@
 import { HaventecAuthenticate } from "../api/haventec.authenticate";
-import { ErrorCode, ErrorMessage, HT_Error } from "../model/error";
-import { HT_DataService } from '../helpers/ht_data.service';
+import { ErrorMessage, HT_Error } from "../model/error";
 import HT_LocalStorage from '../storage/ht_local.storage.service';
-import HaventecCommon from '@haventec/common-web-sdk/';
 import HT_SessionStorage from '../storage/ht_session.storage.service';
-import { HT_Session_Data } from '../model/htsessiondata';
-import { HT_Data } from '../model/htdata';
-import { HT_TokenService } from '../helpers/ht_token.service';
 import { ISessionUpdateRequestObject } from "../model/session.update.request.object";
 
 describe("HT_Authenticate", function () {
