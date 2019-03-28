@@ -1,5 +1,5 @@
 import * as atob from "atob";
-import { Error } from "../model/error";
+import { ErrorCode, ErrorMessage, HT_Error } from "../model/error";
 
 export class HT_TokenService {
 
@@ -11,7 +11,7 @@ export class HT_TokenService {
             const token = JSON.parse(atob(base64));
             return token;
         } catch (error) {
-            throw Error.PARSING_ERROR;
+            throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.PARSING_ERROR);
         }    
     };
 }

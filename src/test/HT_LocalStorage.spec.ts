@@ -1,6 +1,6 @@
 import HT_LocalStorage from '../storage/ht_local.storage.service';
 
-describe("HT_DeviceInfoService", function () {
+describe("HT_LocalStorageService", function () {
     let storeSpyGet: jasmine.Spy;
     let storeSpySet: jasmine.Spy;
     let storeSpyRemove: jasmine.Spy;
@@ -12,7 +12,8 @@ describe("HT_DeviceInfoService", function () {
     });
 
     it("accesses the local storage if data is not found in map ", function () {
-        HT_LocalStorage.getItem("KEY")
+        HT_LocalStorage.removeItem("KEY");
+        HT_LocalStorage.getItem("KEY");
         expect(storeSpyGet).toHaveBeenCalled();
     });
 

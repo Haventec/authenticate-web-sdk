@@ -1,5 +1,5 @@
 import {HT_TokenService} from '../helpers/ht_token.service';
-import { Error } from '../model/error';
+import { HT_Error, ErrorCode, ErrorMessage } from '../model/error';
 
 describe("HT_TokenService", function () {
     it("ignores and returns undefined for undefined/null inputs", function () {
@@ -25,7 +25,7 @@ describe("HT_TokenService", function () {
             EntfKtXAPX31U2OtwTXisgOjD");
             fail();
         } catch (e){
-            expect(e).toBe(Error.PARSING_ERROR);
+            expect(e.message).toBe(ErrorMessage.PARSING_ERROR);
         }
     });
 }); 

@@ -1,8 +1,8 @@
 import {HT_DataService} from '../helpers/ht_data.service';
 import HT_LocalStorage from '../storage/ht_local.storage.service';
-import HaventecCommon from '@haventec/common-web-sdk/';
+import HaventecCommon from '@haventec/common-web-sdk';
 import HT_SessionStorage from '../storage/ht_session.storage.service';
-import { Error } from '../model/error';
+import { HT_Error, ErrorCode, ErrorMessage } from '../model/error';
 import { HT_Session_Data } from '../model/htsessiondata';
 import { HT_Data } from '../model/htdata';
 import {HT_TokenService} from '../helpers/ht_token.service';
@@ -92,7 +92,7 @@ describe("HT_DataService", function () {
             ht_dataServcie.getApplicationUuid();
             fail();
         } catch(e){
-            expect(e).toBe(Error.PARSING_ERROR);
+            expect(e.message).toBe(ErrorMessage.PARSING_ERROR);
         }
         
     });
@@ -111,7 +111,7 @@ describe("HT_DataService", function () {
             ht_dataServcie.getUserUuid();
             fail();
         } catch(e){
-            expect(e).toBe(Error.PARSING_ERROR);
+            expect(e.message).toBe(ErrorMessage.PARSING_ERROR);
         }
     });
 

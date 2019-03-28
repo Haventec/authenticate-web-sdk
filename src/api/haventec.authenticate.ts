@@ -1,5 +1,5 @@
 import { HT_DataService } from "../helpers/ht_data.service";
-import { Error } from "../model/error";
+import { HT_Error, ErrorCode, ErrorMessage } from "../model/error";
 import { ISessionUpdateRequestObject } from "../model/session.update.request.object";
 
 export class HaventecAuthenticate {
@@ -7,13 +7,13 @@ export class HaventecAuthenticate {
     private ht_dataService: HT_DataService;
 
     constructor(username: string) {
-        if (!username) throw Error.INSUFFICIENT_PARAMETERS;
+        if (!username) throw  new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INSUFFICIENT_PARAMETERS);
         this.ht_dataService = new HT_DataService(username.toLowerCase());
     }
 
     public updateStorage(requestObject: ISessionUpdateRequestObject): void {
-        if (!requestObject) throw Error.INVALID_OBJECT;
-        if (Object.keys(requestObject).length < 1) throw Error.INVALID_OBJECT;
+        if (!requestObject) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
+        if (Object.keys(requestObject).length < 1) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
         this.ht_dataService.updateSessionStorage(requestObject);
     }
 
@@ -51,7 +51,7 @@ export class HaventecAuthenticate {
     }
 
     public hashPin(pin: string, salt: Array<number>[128]): string {
-        if (!pin) throw Error.INSUFFICIENT_PARAMETERS;
+        if (!pin) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INSUFFICIENT_PARAMETERS);
         return this.ht_dataService.getHashedPin(pin, salt);
     }
 

@@ -4,7 +4,7 @@ import { HT_Session_Data } from '../model/htsessiondata';
 import HT_SessionStorage from '../storage/ht_session.storage.service';
 import HT_LocalStorage from '../storage/ht_local.storage.service';
 import HaventecCommon from '@haventec/common-web-sdk/';
-import { Error } from '../model/error';
+import { HT_Error, ErrorCode, ErrorMessage } from '../model/error';
 import { ISessionUpdateRequestObject } from '../model/session.update.request.object';
 
 export class HT_DataService {
@@ -87,7 +87,7 @@ export class HT_DataService {
             let tokenData = HT_TokenService.parseJwt(sessionData.accessToken);
             return tokenData['userUUID'];
         } catch (e) {
-            throw Error.PARSING_ERROR;
+            throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.PARSING_ERROR);
         }
     }
 
@@ -97,7 +97,7 @@ export class HT_DataService {
             let tokenData = HT_TokenService.parseJwt(sessionData.accessToken);
             if (tokenData['applicationUUID']) return tokenData['applicationUUID'];
         } catch (e) {
-            throw Error.PARSING_ERROR;
+            throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.PARSING_ERROR);
         }
     }
 

@@ -1,5 +1,5 @@
 import { HaventecAuthenticate } from "../api/haventec.authenticate";
-import { Error } from "../model/error";
+import { ErrorCode, ErrorMessage, HT_Error } from "../model/error";
 import { HT_DataService } from '../helpers/ht_data.service';
 import HT_LocalStorage from '../storage/ht_local.storage.service';
 import HaventecCommon from '@haventec/common-web-sdk/';
@@ -28,7 +28,7 @@ describe("HT_Authenticate", function () {
             new HaventecAuthenticate(undefined);
             fail();
         } catch (e) {
-            expect(e).toBe(Error.INSUFFICIENT_PARAMETERS);
+            expect(e.message).toBe(ErrorMessage.INSUFFICIENT_PARAMETERS);
         }
     });
 
@@ -49,7 +49,7 @@ describe("HT_Authenticate", function () {
         try {
             haventecAuthenticate.updateStorage(undefined);
         } catch (e) {
-            expect(e).toBe(Error.INVALID_OBJECT);
+            expect(e.message).toBe(ErrorMessage.INVALID_OBJECT);
         }
     });
 
@@ -57,7 +57,7 @@ describe("HT_Authenticate", function () {
         try {
             haventecAuthenticate.updateStorage(<any>{});
         } catch (e) {
-            expect(e).toBe(Error.INVALID_OBJECT);
+            expect(e.message).toBe(ErrorMessage.INVALID_OBJECT);
         }
     });
 
@@ -77,7 +77,7 @@ describe("HT_Authenticate", function () {
             haventecAuthenticate.hashPin(undefined, undefined);
             fail();
         } catch (e) {
-            expect(e).toBe(Error.INSUFFICIENT_PARAMETERS);
+            expect(e.message).toBe(ErrorMessage.INSUFFICIENT_PARAMETERS);
         }
     });
 
