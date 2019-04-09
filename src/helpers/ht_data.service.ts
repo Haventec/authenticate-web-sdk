@@ -133,6 +133,10 @@ export class HT_DataService {
         return HaventecCommon.hashPin(pin, salt);
     }
 
+    public getSalt() {
+        return this.getData(this.getUsername()).saltBits;
+    }
+
     public getDeviceInfo(): Object {
         return HaventecCommon.getDeviceInfo();
     }
