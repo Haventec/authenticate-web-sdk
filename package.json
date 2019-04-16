@@ -24,13 +24,6 @@
     "url": "https://github.com/Haventec/authenticate-web-sdk/issues",
     "email": "support@haventec.com"
   },
-  "dependencies": {
-    "@haventec/common-web-sdk": "file:haventec-common-web-sdk-1.0.1.tgz",
-    "@haventec/sjcl512": "1.0.0",
-    "atob": "^2.0.3",
-    "clientjs": "^0.1.11",
-    "fingerprintjs2": "^2.0.6"
-  },
   "devDependencies": {
     "@types/clientjs": "^0.1.0",
     "@types/fingerprintjs2": "^2.0.0",
@@ -52,5 +45,8 @@
       "type": "MIT",
       "url": ""
     }
-  ]
+  ],
+  "dependencies": {
+    "@haventec/common-web-sdk": "^1.0.1"
+  }
 }
