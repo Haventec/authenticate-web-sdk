@@ -28,7 +28,7 @@ export class HT_DataService {
         HT_SessionStorage.setItem(this.session_key, sessionData);
     }
 
-    private removeData(username: string): void {
+    private removeData(): void {
         HT_LocalStorage.removeItem(this.local_key);
     }
 
@@ -125,8 +125,7 @@ export class HT_DataService {
     }
 
     public purgeUser(): void {
-        this.removeData(this.username);
-        this.removeData(this.username_key);
+        this.removeData();
     }
 
     public getHashedPin(pin: string): string {
