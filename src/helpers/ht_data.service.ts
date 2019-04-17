@@ -134,7 +134,7 @@ export class HT_DataService {
     }
 
 
-    public getDeviceInfo(): Object {
-        return HaventecCommon.getDeviceInfo();
+    public getDeviceInfo(detailedFingerprint = false): Object {
+        return HaventecCommon.getDeviceInfo(detailedFingerprint);
     }
 }

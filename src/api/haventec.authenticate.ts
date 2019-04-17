@@ -8,7 +8,7 @@ export class HaventecAuthenticate {
 
     constructor(username: string) {
         if (!username) throw  new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INSUFFICIENT_PARAMETERS);
-        this.ht_dataService = new HT_DataService(username.toLowerCase());
+        this.ht_dataService = new HT_DataService(username);
     }
 
     public updateStorage(requestObject: ISessionUpdateRequestObject): void {
@@ -55,7 +55,7 @@ export class HaventecAuthenticate {
         return this.ht_dataService.getHashedPin(pin);
     }
 
-    public getDeviceInfo(): Object {
-        return this.ht_dataService.getDeviceInfo();
+    public getDeviceInfo(detailedFingerprint = false): Object {
+        return this.ht_dataService.getDeviceInfo(detailedFingerprint);
     }
 }
