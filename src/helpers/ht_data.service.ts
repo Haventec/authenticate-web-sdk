@@ -19,7 +19,7 @@ export class HT_DataService {
         this.setUsername(username);
         let data = this.getData(username);
         if (!data.saltBits) {
-            data.saltBits = HaventecCommon.generateSalt().toString();
+            data.saltBits = HaventecCommon.generateSalt();
             this.setData(data);
         }
     }
@@ -129,13 +129,10 @@ export class HT_DataService {
         this.removeData(this.username_key);
     }
 
-    public getHashedPin(pin: string, salt: Array<number>[128]): string {
-        return HaventecCommon.hashPin(pin, salt);
+    public getHashedPin(pin: string): string {
+        return HaventecCommon.hashPin(pin, this.getData(this.getUsername()).saltBits);
     }
 
-    public getSalt() {
-        return this.getData(this.getUsername()).saltBits;
-    }
 
     public getDeviceInfo(): Object {
         return HaventecCommon.getDeviceInfo();

@@ -35,7 +35,6 @@ The implementation requires window object (browser) and wouldn't function in a n
 * **getAuthKey:** It returns the current authKey of the current user from the Storage.
 
 * **clearUserStorage:** It clears the entire local and session storage used.
-* **getSalt:** It returns the salt to be used while hashing.
 * **hashPin:** It returns a SHA-512 Hashing of the PIN passed as argument.
 * **getDeviceInfo:** It returns the information about device including the fingerprint.
 

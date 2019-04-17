@@ -50,13 +50,9 @@ export class HaventecAuthenticate {
         this.ht_dataService.purgeUser();
     }
 
-    public getSalt(): string {
-        return this.ht_dataService.getSalt();
-    }
-
-    public hashPin(pin: string, salt: Array<number>[128]): string {
+    public hashPin(pin: string): string {
         if (!pin) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INSUFFICIENT_PARAMETERS);
-        return this.ht_dataService.getHashedPin(pin, salt);
+        return this.ht_dataService.getHashedPin(pin);
     }
 
     public getDeviceInfo(): Object {
