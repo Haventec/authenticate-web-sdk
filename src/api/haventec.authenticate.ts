@@ -8,11 +8,12 @@ export class HaventecAuthenticate {
 
     constructor(username: string) {
         if (!username) throw  new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INSUFFICIENT_PARAMETERS);
-        this.ht_dataService = new HT_DataService(username.toLowerCase());
+        this.ht_dataService = new HT_DataService(username);
     }
 
     public updateStorage(requestObject: ISessionUpdateRequestObject): void {
         if (!requestObject) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
+        if(typeof requestObject !== 'object') throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
         if (Object.keys(requestObject).length < 1) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
         this.ht_dataService.updateSessionStorage(requestObject);
     }
@@ -50,16 +51,12 @@ export class HaventecAuthenticate {
         this.ht_dataService.purgeUser();
     }
 
-    public getSalt(): string {
-        return this.ht_dataService.getSalt();
-    }
-
-    public hashPin(pin: string, salt: Array<number>[128]): string {
+    public hashPin(pin: string): string {
         if (!pin) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INSUFFICIENT_PARAMETERS);
-        return this.ht_dataService.getHashedPin(pin, salt);
+        return this.ht_dataService.getHashedPin(pin);
     }
 
-    public getDeviceInfo(): Object {
-        return this.ht_dataService.getDeviceInfo();
+    public getDeviceInfo(detailedFingerprint = false): Object {
+        return this.ht_dataService.getDeviceInfo(detailedFingerprint);
     }
 }
