@@ -16,6 +16,7 @@ cloud-portal-frontend.iml
 .c9/
 *.launch
 .settings/
+authenticate-web-sdk.iml
 
 # IDE - VSCode
 .vscode
