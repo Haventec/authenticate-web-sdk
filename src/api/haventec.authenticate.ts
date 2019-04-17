@@ -13,6 +13,7 @@ export class HaventecAuthenticate {
 
     public updateStorage(requestObject: ISessionUpdateRequestObject): void {
         if (!requestObject) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
+        if(typeof requestObject !== 'object') throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
         if (Object.keys(requestObject).length < 1) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
         this.ht_dataService.updateSessionStorage(requestObject);
     }
