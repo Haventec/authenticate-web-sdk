@@ -60,7 +60,7 @@ describe("HT_Authenticate", function () {
     it("calls the associated function in dataservice if hashpin is called with required parameters", function () {
         try {
             let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'getHashedPin');
-            haventecAuthenticate.hashPin("PIN", 1111);
+            haventecAuthenticate.hashPin("PIN");
             expect(spy).toHaveBeenCalled();
         } catch (e) {
             fail();
@@ -69,7 +69,7 @@ describe("HT_Authenticate", function () {
 
     it("throws error if hashpin is called without required parameters", function () {
         try {
-            haventecAuthenticate.hashPin(undefined, undefined);
+            haventecAuthenticate.hashPin(undefined);
             fail();
         } catch (e) {
             expect(e.message).toBe(ErrorMessage.INSUFFICIENT_PARAMETERS);
