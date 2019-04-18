@@ -4,6 +4,7 @@
 /dist
 /tmp
 /src/**/*.js
+*.tgz
 
 # dependencies
 /node_modules
