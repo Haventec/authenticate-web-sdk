@@ -12,7 +12,7 @@ A collection of javascript functions to facilitate client-side integration with 
 
 The authenticate-web-sdk is not exported as a default export and an instance of it should be created for each user.
 ```
-import { HaventecAuthenticate } from '@haventec/common-web-sdk' 
+import { HaventecAuthenticate } from '@haventec/authenticate-web-sdk' 
 let haventecAuthenticate = new HaventecAuthenticate('username');
 ```
 The implementation requires window object (browser) and wouldn't function in a node.js environment. 

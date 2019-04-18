@@ -46,7 +46,7 @@ describe("HT_DataService", function () {
 
     it("removes username and associated data from storage for purge task", function () {
         ht_dataServcie.purgeUser();
-        expect(localSpy4remove).toHaveBeenCalledTimes(2);
+        expect(localSpy4remove).toHaveBeenCalled();
     });
 
     it("calls the hash-pin functionality in common-web-sdk", function () {
@@ -67,7 +67,7 @@ describe("HT_DataService", function () {
     });
 
     it("updates the sessionstorage while updating resposne object", function () {
-        ht_dataServcie.updateSessionStorage(<ISessionUpdateRequestObject>{"accessToken": {"token":"TOKEN","type":"TYPE"}});
+        ht_dataServcie.updateStorage(<ISessionUpdateRequestObject>{"accessToken": {"token":"TOKEN","type":"TYPE"}});
         expect(sessionSpy4set).toHaveBeenCalled();
         expect(sessionSpy4get).toHaveBeenCalled();
     });

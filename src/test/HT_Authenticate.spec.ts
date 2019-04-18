@@ -31,7 +31,7 @@ describe("HT_Authenticate", function () {
 
     it("calls the associated function in dataservice if updatestorage is called", function () {
         try {
-            let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'updateSessionStorage');
+            let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'updateStorage');
             haventecAuthenticate.updateStorage(<ISessionUpdateRequestObject>{"authKey":"AUTH_KEY"});
             expect(spy).toHaveBeenCalled();
         } catch (e) {

@@ -17,45 +17,48 @@ export class HT_DataService {
     constructor(username: string) {
         username = username.toLowerCase();
         this.setUsername(username);
-        let data = this.getData(username);
+        let data = this.getData();
         if (!data.saltBits) {
             data.saltBits = HaventecCommon.generateSalt();
             this.setData(data);
         }
     }
 
-    private setSessionData(sessionData: HT_Session_Data): void {
-        HT_SessionStorage.setItem(this.session_key, sessionData);
-    }
-
-    private removeData(): void {
-        HT_LocalStorage.removeItem(this.local_key);
-    }
-
     private getSessionData(): HT_Session_Data {
-        let userSessionData = HT_SessionStorage.getItem(this.session_key)
+        let userSessionData = HT_SessionStorage.getItem(this.session_key);
         if (!userSessionData) {
             userSessionData = new HT_Session_Data(undefined, undefined);
+            this.setSessionData(userSessionData);
         }
-        HT_SessionStorage.setItem(this.session_key, userSessionData);
         return userSessionData;
+    }
+
+    private setSessionData(sessionData: HT_Session_Data): void {
+        HT_SessionStorage.setItem(this.session_key, sessionData);
     }
 
     private removeSessionData(): void {
         HT_SessionStorage.removeItem(this.session_key);
     }
 
-    private getData(username: string): HT_Data {
+    private getData(): HT_Data {
         let userLocalData: HT_Data = <HT_Data>HT_LocalStorage.getItem(this.local_key);
         if (userLocalData) return userLocalData;
-        userLocalData = new HT_Data(username, undefined, undefined, undefined, undefined);
-        HT_LocalStorage.setItem(this.local_key, userLocalData);
+        userLocalData = new HT_Data(this.getUsername(), undefined, undefined, undefined, undefined);
+        this.setData(userLocalData);
         return userLocalData;
     }
 
-
     private setData(localData: HT_Data): void {
         HT_LocalStorage.setItem(this.local_key, localData);
+    }
+
+    private removeData(): void {
+        HT_LocalStorage.removeItem(this.local_key);
+    }
+
+    public getUsername(): string {
+        return this.username;
     }
 
     private setUsername(username: string): void {
@@ -63,10 +66,6 @@ export class HT_DataService {
         this.session_key = 'ht_' + username + '_sessiondata';
         this.local_key = 'ht_' + username + '_localdata';
         HT_LocalStorage.setItem(this.username_key, username);
-    }
-
-    public getUsername(): string {
-        return this.username;
     }
 
     public removeUsername(): void {
@@ -78,7 +77,7 @@ export class HT_DataService {
     }
 
     public getDeviceUuid(): string {
-        return this.getData(this.getUsername()).deviceUuid;
+        return this.getData().deviceUuid;
     }
 
     public getUserUuid(): string {
@@ -102,34 +101,40 @@ export class HT_DataService {
     }
 
     public getAuthKey(): string {
-        return this.getData(this.getUsername()).authKey;
+        return this.getData().authKey;
     }
 
-    public updateSessionStorage(requestObject: ISessionUpdateRequestObject): void {
-        let localData = this.getData(this.getUsername());
-        if (requestObject.authKey) localData.authKey = requestObject.authKey;
-        if (requestObject.deviceUuid) localData.deviceUuid = requestObject.deviceUuid;
-        localData.dataTime = new Date();
-        this.setData(localData);
+    public updateStorage(requestObject: ISessionUpdateRequestObject): void {
+        // Update Local Storage if required
+        if(requestObject.authKey || requestObject.deviceUuid) {
+            let localData = this.getData();
+            if (requestObject.authKey) localData.authKey = requestObject.authKey;
+            if (requestObject.deviceUuid) localData.deviceUuid = requestObject.deviceUuid;
+            localData.dataTime = new Date();
+            this.setData(localData);
+        }
 
-        let sessionData = this.getSessionData();
+        // Update Session Storage if required
         if (requestObject.accessToken) {
+            let sessionData = this.getSessionData();
             sessionData.accessToken = requestObject.accessToken.token;
             sessionData.accessTokenType = requestObject.accessToken.type;
+            this.setSessionData(sessionData);
         }
-        this.setSessionData(sessionData);
     }
 
     public invalidateToken(): void {
-        this.removeSessionData()
+        this.removeSessionData();
     }
 
     public purgeUser(): void {
+        this.invalidateToken();
         this.removeData();
+        this.removeUsername();
     }
 
     public getHashedPin(pin: string): string {
-        return HaventecCommon.hashPin(pin, this.getData(this.getUsername()).saltBits);
+        return HaventecCommon.hashPin(pin, this.getData().saltBits);
     }
 
 

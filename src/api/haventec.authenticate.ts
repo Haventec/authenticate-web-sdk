@@ -15,7 +15,7 @@ export class HaventecAuthenticate {
         if (!requestObject) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
         if(typeof requestObject !== 'object') throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
         if (Object.keys(requestObject).length < 1) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
-        this.ht_dataService.updateSessionStorage(requestObject);
+        this.ht_dataService.updateStorage(requestObject);
     }
 
     public getDeviceName(): string {
