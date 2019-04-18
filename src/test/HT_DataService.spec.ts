@@ -6,7 +6,7 @@ import { ErrorMessage } from '../model/error';
 import { HT_Session_Data } from '../model/htsessiondata';
 import { HT_Data } from '../model/htdata';
 import {HT_TokenService} from '../helpers/ht_token.service';
-import { ISessionUpdateRequestObject } from '../model/session.update.request.object';
+import { IHaventecAuthenticateResponseObject } from '../model/haventec.authenticate.response.object';
 
 describe("HT_DataService", function () {
     let localSpy4get: jasmine.Spy;
@@ -67,7 +67,7 @@ describe("HT_DataService", function () {
     });
 
     it("updates the sessionstorage while updating resposne object", function () {
-        ht_dataServcie.updateStorage(<ISessionUpdateRequestObject>{"accessToken": {"token":"TOKEN","type":"TYPE"}});
+        ht_dataServcie.updateStorage(<IHaventecAuthenticateResponseObject>{"accessToken": {"token":"TOKEN","type":"TYPE"}});
         expect(sessionSpy4set).toHaveBeenCalled();
         expect(sessionSpy4get).toHaveBeenCalled();
     });

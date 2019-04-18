@@ -2,7 +2,7 @@ import { HaventecAuthenticate } from "../api/haventec.authenticate";
 import { ErrorMessage, HT_Error } from "../model/error";
 import HT_LocalStorage from '../storage/ht_local.storage.service';
 import HT_SessionStorage from '../storage/ht_session.storage.service';
-import { ISessionUpdateRequestObject } from "../model/session.update.request.object";
+import { IHaventecAuthenticateResponseObject } from "../model/haventec.authenticate.response.object";
 
 describe("HT_Authenticate", function () {
 
@@ -32,7 +32,7 @@ describe("HT_Authenticate", function () {
     it("calls the associated function in dataservice if updatestorage is called", function () {
         try {
             let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'updateStorage');
-            haventecAuthenticate.updateStorage(<ISessionUpdateRequestObject>{"authKey":"AUTH_KEY"});
+            haventecAuthenticate.updateStorage(<IHaventecAuthenticateResponseObject>{"authKey":"AUTH_KEY"});
             expect(spy).toHaveBeenCalled();
         } catch (e) {
             fail();

@@ -5,7 +5,7 @@ import HT_SessionStorage from '../storage/ht_session.storage.service';
 import HT_LocalStorage from '../storage/ht_local.storage.service';
 import HaventecCommon from '@haventec/common-web-sdk/';
 import { HT_Error, ErrorCode, ErrorMessage } from '../model/error';
-import { ISessionUpdateRequestObject } from '../model/session.update.request.object';
+import { IHaventecAuthenticateResponseObject } from '../model/haventec.authenticate.response.object';
 
 export class HT_DataService {
 
@@ -104,7 +104,7 @@ export class HT_DataService {
         return this.getData().authKey;
     }
 
-    public updateStorage(requestObject: ISessionUpdateRequestObject): void {
+    public updateStorage(requestObject: IHaventecAuthenticateResponseObject): void {
         // Update Local Storage if required
         if(requestObject.authKey || requestObject.deviceUuid) {
             let localData = this.getData();

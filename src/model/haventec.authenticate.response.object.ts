@@ -1,4 +1,4 @@
-export interface ISessionUpdateRequestObject {
+export interface IHaventecAuthenticateResponseObject {
     accessToken: IToken;
     authKey: string;
     deviceUuid: string;

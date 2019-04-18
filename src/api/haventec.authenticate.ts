@@ -1,6 +1,6 @@
 import { HT_DataService } from "../helpers/ht_data.service";
 import { HT_Error, ErrorCode, ErrorMessage } from "../model/error";
-import { ISessionUpdateRequestObject } from "../model/session.update.request.object";
+import { IHaventecAuthenticateResponseObject } from "../model/haventec.authenticate.response.object";
 
 export class HaventecAuthenticate {
 
@@ -11,7 +11,7 @@ export class HaventecAuthenticate {
         this.ht_dataService = new HT_DataService(username);
     }
 
-    public updateStorage(requestObject: ISessionUpdateRequestObject): void {
+    public updateStorage(requestObject: IHaventecAuthenticateResponseObject): void {
         if (!requestObject) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
         if(typeof requestObject !== 'object') throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
         if (Object.keys(requestObject).length < 1) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INVALID_OBJECT);
