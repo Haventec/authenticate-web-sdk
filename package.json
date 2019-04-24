@@ -1,33 +1,42 @@
 {
-  "name": "@haventec/authenticate-client-js",
-  "version": "2.1.0",
-  "description": "Haventec Authenticate Client JS",
+  "name": "@haventec/authenticate-web-sdk",
+  "version": "1.0.0",
+  "description": "Haventec Authenticate Web SDK",
   "keywords": [],
-  "author": "Haventec <info@haventec.com>",
-  "repository": "",
+  "author": "Haventec <support@haventec.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Haventec/authenticate-web-sdk.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepare": "tsc",
+    "test": "./node_modules/karma/bin/karma start karma.conf.js"
+  },
   "contributors": [
     {
       "name": "Haventec"
     }
   ],
   "bugs": {
-    "url": "",
-    "email": "info@haventec.com"
-  },
-  "dependencies": {
-    "@haventec/sjcl512": "1.0.0",
-    "@types/node": "^8.5.2",
-    "atob": "^2.0.3",
-    "superagent": "^3.5.1"
+    "url": "https://github.com/Haventec/authenticate-web-sdk/issues",
+    "email": "support@haventec.com"
   },
   "devDependencies": {
+    "@types/clientjs": "^0.1.0",
+    "@types/fingerprintjs2": "^2.0.0",
+    "@types/jasmine": "^3.3.12",
+    "@types/node": "^8.5.2",
     "core-js": "^2.4.1",
-    "superagent-mock": "^3.3.0",
-    "tapbuffer": "^1.0.9",
-    "tapbundle": "^1.0.5",
+    "jasmine": "^3.3.1",
+    "jasmine-core": "^3.3.0",
+    "karma": "^4.0.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-typescript": "^4.0.0",
+    "ts-node": "^8.0.3",
     "typescript": "^2.3.2"
   },
   "peerDependencies": {},
@@ -36,5 +45,8 @@
       "type": "MIT",
       "url": ""
     }
-  ]
+  ],
+  "dependencies": {
+    "@haventec/common-web-sdk": "1.0.1"
+  }
 }
