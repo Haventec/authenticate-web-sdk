@@ -6,7 +6,7 @@ class HT_LocalStorage  {
 
   private localDataMap: Object;
 
-  private store = window.sessionStorage;
+  private store = window.localStorage;
 
   private static _instance: HT_LocalStorage;
 
