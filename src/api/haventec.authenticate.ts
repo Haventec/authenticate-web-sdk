@@ -52,7 +52,7 @@ export class HaventecAuthenticate {
     }
 
     public hashPin(pin: string): string {
-        if (!pin) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INSUFFICIENT_PARAMETERS);
+        if (pin===undefined) throw new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INSUFFICIENT_PARAMETERS);
         return this.ht_dataService.getHashedPin(pin);
     }
 
