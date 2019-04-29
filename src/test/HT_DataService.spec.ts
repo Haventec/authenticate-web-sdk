@@ -49,12 +49,6 @@ describe("HT_DataService", function () {
         expect(localSpy4remove).toHaveBeenCalled();
     });
 
-    it("calls the hash-pin functionality in common-web-sdk", function () {
-        let Hc_spy = spyOn(HaventecCommon, 'hashPin');
-        ht_dataServcie.getHashedPin("");
-        expect(Hc_spy).toHaveBeenCalled();
-    });
-
     it("calls the device-info functionality in common-web-sdk", function () {
         let hc_spy = spyOn(HaventecCommon, 'getDeviceInfo');
         ht_dataServcie.getDeviceInfo();
