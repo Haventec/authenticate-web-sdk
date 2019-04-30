@@ -134,7 +134,8 @@ export class HT_DataService {
     }
 
     public getHashedPin(pin: string): string {
-        return HaventecCommon.hashPin(pin, <any>this.getData().saltBits.toString());
+        let salt: Array<number>[128] = (<any>this.getData().saltBits).length == 128 ? this.getData().saltBits : JSON.parse(this.getData().saltBits.toString());
+        return HaventecCommon.hashPin(pin, salt);
     }
 
 
