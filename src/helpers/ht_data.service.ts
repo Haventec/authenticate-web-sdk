@@ -19,7 +19,7 @@ export class HT_DataService {
         this.setUsername(username);
         let data = this.getData();
         if (!data.saltBits) {
-            data.saltBits = HaventecCommon.generateSalt();
+            data.saltBits = JSON.stringify(HaventecCommon.generateSalt());
             this.setData(data);
         }
     }
