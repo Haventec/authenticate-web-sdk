@@ -6,10 +6,10 @@ import { IHaventecAuthenticateResponseObject } from "../model/haventec.authentic
 
 describe("HT_Authenticate", function () {
 
-    let haventecAuthenticate: HaventecAuthenticate;
+    let haventecAuthenticate: HaventecAuthenticate = new HaventecAuthenticate();
 
     beforeAll(() => {
-        haventecAuthenticate = new HaventecAuthenticate("username");
+        haventecAuthenticate.initialiseStorage("username");
         spyOn(HT_LocalStorage, 'setItem');
         spyOn(HT_LocalStorage, 'removeItem');
         spyOn(HT_LocalStorage, 'getItem');
@@ -20,7 +20,7 @@ describe("HT_Authenticate", function () {
 
     it("throws error if user tries to create an object with undefined/null value for username", function () {
         try {
-            new HaventecAuthenticate(undefined);
+            haventecAuthenticate.initialiseStorage(undefined);
             fail();
         } catch (e) {
             expect(e.message).toBe(ErrorMessage.INSUFFICIENT_PARAMETERS);

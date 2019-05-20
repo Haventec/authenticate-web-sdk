@@ -20,6 +20,7 @@ The implementation requires window object (browser) and wouldn't function in a n
 ## Methods 
 
 
+* **initialiseStorage:** It sets the current user, with data, initialising the salt if not already set. Any existing data is not overridden, so effectively enables use switching
 * **updateStorage:** It updates the storage with the object passed as parameter.
 
 * **getDeviceName:** It returns device-name set by default.
