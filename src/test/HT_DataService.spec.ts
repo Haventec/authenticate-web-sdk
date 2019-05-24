@@ -10,6 +10,7 @@ import { IHaventecAuthenticateResponseObject } from '../model/haventec.authentic
 
 describe("HT_DataService", function () {
     let localSpy4get: jasmine.Spy;
+    let localSpy4getAll: jasmine.Spy;
     let localSpy4set: jasmine.Spy;
     let localSpy4remove: jasmine.Spy;
     let sessionSpy4get: jasmine.Spy;
@@ -17,15 +18,16 @@ describe("HT_DataService", function () {
     let sessionSpy4remove: jasmine.Spy;
     let ht_dataServcie: HT_DataService;
 
-    beforeAll(()=>{
+    beforeAll(() => {
         ht_dataServcie = new HT_DataService("username");
     })
     
 
-    beforeEach(()=>{
+    beforeEach(() => {
         localSpy4set =  spyOn(HT_LocalStorage, 'setItem');
         localSpy4remove =  spyOn(HT_LocalStorage,'removeItem');
         localSpy4get =  spyOn(HT_LocalStorage, 'getItem');
+        localSpy4getAll =  spyOn(HT_LocalStorage, 'getAllItems');
         sessionSpy4set =  spyOn(HT_SessionStorage, 'setItem');
         sessionSpy4remove =  spyOn(HT_SessionStorage,'removeItem');
         sessionSpy4get =  spyOn(HT_SessionStorage, 'getItem');
@@ -71,6 +73,25 @@ describe("HT_DataService", function () {
         expect(ht_dataServcie.getAccessToken()).toBe("XXX");
     });
 
+    it("calls and returns active users from local storage", function () {
+        let activeUser = {"deviceUuid": "deviceUuid1", "username": "user1@mail.com"};
+        localSpy4getAll.and.returnValue({"ht_user1@mail.com_localdata": activeUser});
+        localSpy4get.withArgs("ht_user1@mail.com_localdata").and.returnValue(activeUser)
+        expect(ht_dataServcie.getActiveUsernames()).toEqual(["user1@mail.com"]);
+    });
+
+    it("calls and returns an empty list when local storage has no active users", function () {
+        let activeUser = {"username": "user1@mail.com"};
+        localSpy4getAll.and.returnValue({"ht_user1@mail.com_localdata": activeUser});
+        localSpy4get.withArgs("ht_user1@mail.com_localdata").and.returnValue(activeUser)
+        expect(ht_dataServcie.getActiveUsernames()).toEqual([]);
+    });
+
+    it("calls and returns a list of active users from local storage", function () {
+        localSpy4get.and.returnValue(<HT_Data>{"deviceUuid":"XXX"})
+        expect(ht_dataServcie.getDeviceUuid()).toBe("XXX");
+    });
+
     it("calls and returns value from local storage when deviceUuid is requested", function () {
         localSpy4get.and.returnValue(<HT_Data>{"deviceUuid":"XXX"})
         expect(ht_dataServcie.getDeviceUuid()).toBe("XXX");
@@ -80,7 +101,7 @@ describe("HT_DataService", function () {
         localSpy4get.and.returnValue(<HT_Data>{"authKey":"XXX"})
         expect(ht_dataServcie.getAuthKey()).toBe("XXX");
     });
-
+    
     it("throws error if accesstoken is worng while requesting for application-uuid", function () {
         try{
             ht_dataServcie.getApplicationUuid();
@@ -88,7 +109,6 @@ describe("HT_DataService", function () {
         } catch(e){
             expect(e.message).toBe(ErrorMessage.PARSING_ERROR);
         }
-        
     });
 
     it("calls and returns value by parsing accessToken in session storage when applicationUUID is requested", function () {
@@ -117,8 +137,5 @@ describe("HT_DataService", function () {
             fail();
         }    
     });
-
-   
-
 
 }); 

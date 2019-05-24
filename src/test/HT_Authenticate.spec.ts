@@ -13,6 +13,7 @@ describe("HT_Authenticate", function () {
         spyOn(HT_LocalStorage, 'setItem');
         spyOn(HT_LocalStorage, 'removeItem');
         spyOn(HT_LocalStorage, 'getItem');
+        spyOn(HT_LocalStorage, 'getAllItems');
         spyOn(HT_SessionStorage, 'setItem');
         spyOn(HT_SessionStorage, 'removeItem');
         spyOn(HT_SessionStorage, 'getItem');
@@ -80,6 +81,17 @@ describe("HT_Authenticate", function () {
         try {
             let spy = spyOn(haventecAuthenticate, 'getDeviceInfo').and.returnValue({ "osType": "MacOS", "browserType": "Chromium" });
             expect(haventecAuthenticate.getDeviceName()).toBe("MacOS+Chromium");
+            expect(spy).toHaveBeenCalled();
+        } catch (e) {
+            fail();
+        }
+    });
+
+    it("calls the associated function in dataservice and returns correct usernames", function () {
+        try {
+            let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'getActiveUsernames').and.returnValue(["user1@mail.com", "user2@mail.com"]);
+            expect(haventecAuthenticate.getActiveUsernames()).toEqual(["user1@mail.com", "user2@mail.com"]);
+            expect(spy).toHaveBeenCalled();
         } catch (e) {
             fail();
         }

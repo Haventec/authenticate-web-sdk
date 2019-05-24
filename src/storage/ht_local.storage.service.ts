@@ -18,13 +18,16 @@ class HT_LocalStorage  {
     return this._instance || (this._instance = new this());
   }
 
-
   public getItem(key: string): HT_Data|string {
     let value  = this.localDataMap[key];
     if (value) return value;
     let data = this.store.getItem(key);
     if (data) return JSON.parse(data);
     return;
+  }
+
+  public getAllItems(): Storage {
+    return this.store;
   }
   
   public removeItem(key: string): void {

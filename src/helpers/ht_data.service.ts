@@ -61,6 +61,15 @@ export class HT_DataService {
         return this.username;
     }
 
+    public getActiveUsernames(): string[] {
+        let items = HT_LocalStorage.getAllItems();
+        return Object.keys(items).filter(key =>
+            key.substring(0, 3) === 'ht_' &&
+            key.substring(key.length - 10, key.length) === '_localdata'
+            && (<HT_Data>HT_LocalStorage.getItem(key)).deviceUuid)
+            .map(key => (<HT_Data>HT_LocalStorage.getItem(key)).username);
+    }
+
     private setUsername(username: string): void {
         this.username = username;
         this.session_key = 'ht_' + username + '_sessiondata';
@@ -106,7 +115,7 @@ export class HT_DataService {
 
     public updateStorage(requestObject: IHaventecAuthenticateResponseObject): void {
         // Update Local Storage if required
-        if(requestObject.authKey || requestObject.deviceUuid) {
+        if (requestObject.authKey || requestObject.deviceUuid) {
             let localData = this.getData();
             if (requestObject.authKey) localData.authKey = requestObject.authKey;
             if (requestObject.deviceUuid) localData.deviceUuid = requestObject.deviceUuid;
@@ -137,7 +146,6 @@ export class HT_DataService {
         let salt: Array<number>[128] = (<any>this.getData().saltBits).length == 128 ? this.getData().saltBits : JSON.parse(this.getData().saltBits.toString());
         return HaventecCommon.hashPin(pin, salt);
     }
-
 
     public getDeviceInfo(detailedFingerprint = false): Object {
         return HaventecCommon.getDeviceInfo(detailedFingerprint);
