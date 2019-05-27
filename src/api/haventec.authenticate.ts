@@ -6,7 +6,10 @@ export class HaventecAuthenticate {
 
     private ht_dataService: HT_DataService;
 
-    constructor(username: string) {
+    constructor() {
+    }
+
+    public initialiseStorage(username: string) {
         if (!username) throw  new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INSUFFICIENT_PARAMETERS);
         this.ht_dataService = new HT_DataService(username);
     }
