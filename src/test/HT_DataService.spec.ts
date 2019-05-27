@@ -87,6 +87,16 @@ describe("HT_DataService", function () {
         expect(ht_dataServcie.getActiveUsernames()).toEqual([]);
     });
 
+    it("calls and returns an empty list when local storage is empty", function () {
+        localSpy4getAll.and.returnValue({});
+        expect(ht_dataServcie.getActiveUsernames()).toEqual([]);
+    });
+
+    it("calls and returns an empty list when local storage contains non-user related data", function () {
+        localSpy4getAll.and.returnValue({"randomKey": {"randomValuey":"randomvalue"}});
+        expect(ht_dataServcie.getActiveUsernames()).toEqual([]);
+    });
+
     it("calls and returns a list of active users from local storage", function () {
         localSpy4get.and.returnValue(<HT_Data>{"deviceUuid":"XXX"})
         expect(ht_dataServcie.getDeviceUuid()).toBe("XXX");

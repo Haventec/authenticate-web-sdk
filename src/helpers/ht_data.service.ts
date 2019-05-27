@@ -62,10 +62,10 @@ export class HT_DataService {
     }
 
     public getActiveUsernames(): string[] {
+        const usernamePattern = /^ht_.+_localdata/;
         let items = HT_LocalStorage.getAllItems();
         return Object.keys(items).filter(key =>
-            key.substring(0, 3) === 'ht_' &&
-            key.substring(key.length - 10, key.length) === '_localdata'
+            usernamePattern.test(key)
             && (<HT_Data>HT_LocalStorage.getItem(key)).deviceUuid)
             .map(key => (<HT_Data>HT_LocalStorage.getItem(key)).username);
     }
