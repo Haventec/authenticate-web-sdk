@@ -28,6 +28,7 @@ The implementation requires window object (browser) and wouldn't function in a n
 * **getAccessToken:** It returns the access-token of the user.
 
 * **getUsername:** It returns username of the current user.
+* **getActiveUsernames:** It returns the usernames of all activated users.
 
 * **getDeviceUuid:** It returns the uuid of the device generated through authenticate.
 * **getUserUuid:** It returns the uuid of the current user.
