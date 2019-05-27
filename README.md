@@ -13,9 +13,22 @@ A collection of javascript functions to facilitate client-side integration with 
 The authenticate-web-sdk is not exported as a default export and an instance of it should be created for each user.
 ```
 import { HaventecAuthenticate } from '@haventec/authenticate-web-sdk' 
-let haventecAuthenticate = new HaventecAuthenticate('username');
+let haventecAuthenticate = new HaventecAuthenticate();
 ```
-The implementation requires window object (browser) and wouldn't function in a node.js environment. 
+The implementation requires the window object (browser) and will not function in a node.js environment. 
+
+## Angular Usage:
+
+export function HaventecAuthenticateFactory() {
+    return new HaventecAuthenticate();
+};
+
+export let HaventecAuthenticateProvider = { provide: HaventecAuthenticate,
+    useFactory: HaventecAuthenticateFactory,
+    deps: []
+};
+
+Then you can add HaventecAuthenticateProvider to the providers array of the @NgModule, and inject HaventecAuthenticate into the constructors of @Components as is standard.
 
 ## Methods 
 
@@ -29,6 +42,7 @@ The implementation requires window object (browser) and wouldn't function in a n
 * **getAccessToken:** It returns the access-token of the user.
 
 * **getUsername:** It returns username of the current user.
+* **getActiveUsernames:** It returns the usernames of all activated users.
 
 * **getDeviceUuid:** It returns the uuid of the device generated through authenticate.
 * **getUserUuid:** It returns the uuid of the current user.

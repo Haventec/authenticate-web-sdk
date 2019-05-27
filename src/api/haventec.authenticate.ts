@@ -38,6 +38,10 @@ export class HaventecAuthenticate {
         return this.ht_dataService.getUsername();
     }
 
+    public getActiveUsernames(): string[] {
+        return this.ht_dataService.getActiveUsernames();
+    }
+
     public getDeviceUuid(): string {
         return this.ht_dataService.getDeviceUuid();
     }
