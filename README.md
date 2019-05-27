@@ -19,6 +19,7 @@ The implementation requires the window object (browser) and will not function in
 
 ## Angular Usage:
 
+```
 export function HaventecAuthenticateFactory() {
     return new HaventecAuthenticate();
 };
@@ -27,6 +28,7 @@ export let HaventecAuthenticateProvider = { provide: HaventecAuthenticate,
     useFactory: HaventecAuthenticateFactory,
     deps: []
 };
+```
 
 Then you can add HaventecAuthenticateProvider to the providers array of the @NgModule, and inject HaventecAuthenticate into the constructors of @Components as is standard.
 
