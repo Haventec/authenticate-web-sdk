@@ -14,8 +14,16 @@ export class HT_DataService {
     private session_key: string;
     private local_key: string;
 
-    constructor(username: string) {
-        username = username.toLowerCase();
+    constructor(username?: string) {
+
+        if ( !username ) {
+            username = localStorage.getItem('haventec_username');
+        }
+
+        if (!username) throw  new HT_Error(ErrorCode.HT_INIT_ERROR, ErrorMessage.INIT_ERROR);
+
+        username = username.toLowerCase().replace(/\"/g, '');
+
         this.setUsername(username);
         let data = this.getData();
         if (!data.saltBits) {
@@ -71,7 +79,7 @@ export class HT_DataService {
     }
 
     private setUsername(username: string): void {
-        this.username = username;
+        this.username = username.replace(/\"/g, '');
         this.session_key = 'ht_' + username + '_sessiondata';
         this.local_key = 'ht_' + username + '_localdata';
         HT_LocalStorage.setItem(this.username_key, username);
