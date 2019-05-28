@@ -17,18 +17,21 @@ export class HT_DataService {
     constructor(username?: string) {
 
         if ( !username ) {
-            username = localStorage.getItem('haventec_username');
+            const haventec_username = HT_LocalStorage.getItem('haventec_username');
+            if ( haventec_username ) {
+                username = haventec_username.toString();
+            }
         }
 
-        if (!username) throw  new HT_Error(ErrorCode.HT_INIT_ERROR, ErrorMessage.INIT_ERROR);
+        if ( username ) {
+            username = username.toLowerCase().replace(/\"/g, '');
 
-        username = username.toLowerCase().replace(/\"/g, '');
-
-        this.setUsername(username);
-        let data = this.getData();
-        if (!data.saltBits) {
-            data.saltBits = JSON.stringify(HaventecCommon.generateSalt());
-            this.setData(data);
+            this.setUsername(username);
+            let data = this.getData();
+            if (!data.saltBits) {
+                data.saltBits = JSON.stringify(HaventecCommon.generateSalt());
+                this.setData(data);
+            }
         }
     }
 

@@ -6,7 +6,7 @@ import { IHaventecAuthenticateResponseObject } from "../model/haventec.authentic
 
 describe("HT_Authenticate", function () {
 
-    let haventecAuthenticate: HaventecAuthenticate = new HaventecAuthenticate();
+    let haventecAuthenticate: HaventecAuthenticate = new HaventecAuthenticate("username");
 
     beforeAll(() => {
         haventecAuthenticate.initialiseStorage("username");
@@ -19,6 +19,11 @@ describe("HT_Authenticate", function () {
         spyOn(HT_SessionStorage, 'getItem');
     });
 
+    it("calls getAccessToken() without initialisation to ensure this is valid but returns null", function () {
+        const haventecAuthenticate2: HaventecAuthenticate = new HaventecAuthenticate();
+        expect(haventecAuthenticate2.getAccessToken()).toBeUndefined();
+    });
+
     it("throws error if user tries to create an object with undefined/null value for username", function () {
         try {
             haventecAuthenticate.initialiseStorage(undefined);
@@ -28,7 +33,7 @@ describe("HT_Authenticate", function () {
         }
     });
 
-    
+
 
     it("calls the associated function in dataservice if updatestorage is called", function () {
         try {

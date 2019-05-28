@@ -6,8 +6,8 @@ export class HaventecAuthenticate {
 
     private ht_dataService: HT_DataService;
 
-    constructor() {
-        this.ht_dataService = new HT_DataService();
+    constructor(username?: string) {
+        this.ht_dataService = new HT_DataService(username);
     }
 
     public initialiseStorage(username: string) {
