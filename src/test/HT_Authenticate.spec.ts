@@ -19,7 +19,7 @@ describe("HT_Authenticate", function () {
         spyOn(HT_SessionStorage, 'getItem');
     });
 
-    it("calls getAccessToken() without initialisation to ensure this is valid but returns null", function () {
+    it("calls getAccessToken() without initialisation to ensure this is valid but returns undefined", function () {
         const haventecAuthenticate2: HaventecAuthenticate = new HaventecAuthenticate();
         expect(haventecAuthenticate2.getAccessToken()).toBeUndefined();
     });

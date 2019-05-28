@@ -27,7 +27,7 @@ export class HT_DataService {
             username = username.toLowerCase().replace(/\"/g, '');
 
             this.setUsername(username);
-            let data = this.getData();
+            let data: HT_Data = this.getData();
             if (!data.saltBits) {
                 data.saltBits = JSON.stringify(HaventecCommon.generateSalt());
                 this.setData(data);
@@ -82,10 +82,9 @@ export class HT_DataService {
     }
 
     private setUsername(username): void {
-        username = username.replace(/(^\")|("$)/gi, "");
         this.username = username;
-        this.session_key = 'ht_' + this.username + '_sessiondata';
-        this.local_key = 'ht_' + this.username + '_localdata';
+        this.session_key = 'ht_' + username + '_sessiondata';
+        this.local_key = 'ht_' + username + '_localdata';
         localStorage.setItem(this.username_key, username);
     }
 
