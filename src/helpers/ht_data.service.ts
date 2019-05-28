@@ -81,11 +81,12 @@ export class HT_DataService {
             .map(key => (<HT_Data>HT_LocalStorage.getItem(key)).username);
     }
 
-    private setUsername(username: string): void {
-        this.username = username.replace(/\"/g, '');
-        this.session_key = 'ht_' + username + '_sessiondata';
-        this.local_key = 'ht_' + username + '_localdata';
-        HT_LocalStorage.setItem(this.username_key, username);
+    private setUsername(username): void {
+        username = username.replace(/(^\")|("$)/gi, "");
+        this.username = username;
+        this.session_key = 'ht_' + this.username + '_sessiondata';
+        this.local_key = 'ht_' + this.username + '_localdata';
+        localStorage.setItem(this.username_key, username);
     }
 
     public removeUsername(): void {
