@@ -17,7 +17,7 @@ export class HT_DataService {
     constructor(username?: string) {
 
         if ( !username ) {
-            const haventec_username = HT_LocalStorage.getItem('haventec_username');
+            const haventec_username = localStorage.getItem('haventec_username');
             if ( haventec_username ) {
                 username = haventec_username.toString();
             }
