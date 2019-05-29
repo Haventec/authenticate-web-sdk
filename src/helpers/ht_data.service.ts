@@ -9,18 +9,31 @@ import { IHaventecAuthenticateResponseObject } from '../model/haventec.authentic
 
 export class HT_DataService {
 
-    private username: string;
+    private _username: string;
     private username_key: string = 'haventec_username';
     private session_key: string;
     private local_key: string;
 
-    constructor(username: string) {
-        username = username.toLowerCase();
-        this.setUsername(username);
-        let data = this.getData();
-        if (!data.saltBits) {
-            data.saltBits = JSON.stringify(HaventecCommon.generateSalt());
-            this.setData(data);
+    constructor(username?: string) {
+
+        let localUsername = username;
+
+        if ( !localUsername ) {
+            const haventec_username = localStorage.getItem(this.username_key);
+            if ( haventec_username ) {
+                localUsername = haventec_username.toString();
+            }
+        }
+
+        if ( localUsername ) {
+            localUsername = localUsername.toLowerCase().replace(/\"/g, '');
+
+            this.setUsername(localUsername);
+            let data: HT_Data = this.getData();
+            if (!data.saltBits) {
+                data.saltBits = JSON.stringify(HaventecCommon.generateSalt());
+                this.setData(data);
+            }
         }
     }
 
@@ -58,7 +71,7 @@ export class HT_DataService {
     }
 
     public getUsername(): string {
-        return this.username;
+        return this._username;
     }
 
     public getActiveUsernames(): string[] {
@@ -70,11 +83,11 @@ export class HT_DataService {
             .map(key => (<HT_Data>HT_LocalStorage.getItem(key)).username);
     }
 
-    private setUsername(username: string): void {
-        this.username = username;
+    private setUsername(username): void {
+        this._username = username;
         this.session_key = 'ht_' + username + '_sessiondata';
         this.local_key = 'ht_' + username + '_localdata';
-        HT_LocalStorage.setItem(this.username_key, username);
+        localStorage.setItem(this.username_key, username);
     }
 
     public removeUsername(): void {
