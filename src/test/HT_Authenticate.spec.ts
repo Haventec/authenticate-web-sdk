@@ -84,8 +84,38 @@ describe("HT_Authenticate", function () {
 
     it("calls the associated function in dataservice and gets devicename is appropriate format", function () {
         try {
-            let spy = spyOn(haventecAuthenticate, 'getDeviceInfo').and.returnValue({ "osType": "MacOS", "browserType": "Chromium" });
+            let spy = spyOn(haventecAuthenticate, 'getDeviceInfo').and.returnValue({
+                params: [
+                    {key: "osType", value: "MacOS"},
+                    {key: "browserType", value: "Chromium"}
+                ]
+            });
             expect(haventecAuthenticate.getDeviceName()).toBe("MacOS+Chromium");
+            expect(spy).toHaveBeenCalled();
+        } catch (e) {
+            fail();
+        }
+    });
+
+    it("calls the associated function in dataservice and gets devicename is appropriate format - osType and browserType params missing", function () {
+        try {
+            let spy = spyOn(haventecAuthenticate, 'getDeviceInfo').and.returnValue({
+                params: [
+                    {key: "os-type", value: "MacOS"},
+                    {key: "browser-type", value: "Chromium"}
+                ]
+            });
+            expect(haventecAuthenticate.getDeviceName()).toBe("Generic Device");
+            expect(spy).toHaveBeenCalled();
+        } catch (e) {
+            fail();
+        }
+    });
+
+    it("calls the associated function in dataservice and gets devicename is appropriate format - with no deviceInfo", function () {
+        try {
+            let spy = spyOn(haventecAuthenticate, 'getDeviceInfo').and.returnValue(null);
+            expect(haventecAuthenticate.getDeviceName()).toBe("Generic Device");
             expect(spy).toHaveBeenCalled();
         } catch (e) {
             fail();
