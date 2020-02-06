@@ -163,4 +163,14 @@ export class HT_DataService {
     public getDeviceInfo(detailedFingerprint = false): Object {
         return HaventecCommon.getDeviceInfo(detailedFingerprint);
     }
+
+    public getValueFromKey(obj: any, key: string): string {
+
+        for ( let i=0; obj && i<obj.length; i++ ) {
+            if ( obj[i]['key'] === key ) {
+                return obj[i]['value'];
+            }
+        }
+        return '';
+    }
 }

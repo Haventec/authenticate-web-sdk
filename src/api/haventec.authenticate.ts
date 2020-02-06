@@ -24,7 +24,18 @@ export class HaventecAuthenticate {
 
     public getDeviceName(): string {
         let deviceInfo = this.getDeviceInfo();
-        return deviceInfo['osType'] + "+" + deviceInfo['browserType']
+        if ( deviceInfo && deviceInfo['params'] ) {
+            let osType = this.ht_dataService.getValueFromKey(deviceInfo['params'], 'osType');
+            let browserType = this.ht_dataService.getValueFromKey(deviceInfo['params'], 'browserType');
+
+            if ( osType && browserType ) {
+                return osType + "+" + browserType;
+            } else {
+                return 'Generic Device';
+            }
+        } else {
+            return 'Generic Device';
+        }
     }
 
     public clearAccessToken(): void {
