@@ -67,6 +67,10 @@ export class HT_DataService {
     }
 
     private removeData(): void {
+        if (!this.getData()) {
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
+        }
+
         HT_LocalStorage.removeItem(this.local_key);
     }
 
@@ -91,6 +95,10 @@ export class HT_DataService {
     }
 
     public removeUsername(): void {
+        if (!this.getData()) {
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
+        }
+
         HT_LocalStorage.removeItem(this.username_key);
     }
 
@@ -99,6 +107,10 @@ export class HT_DataService {
     }
 
     public getDeviceUuid(): string {
+        if (!this.getData()) {
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
+        }
+
         return this.getData().deviceUuid;
     }
 
@@ -126,7 +138,25 @@ export class HT_DataService {
         return this.getData().authKey;
     }
 
+    public getSalt(): string {
+        return this.getData().saltBits;
+    }
+    public setSalt(salt: string) {
+        if (!this.getData()) {
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
+        }
+
+        let data: HT_Data = this.getData();
+        data.saltBits = salt;
+        this.setData(data);
+    }
+
     public updateStorage(requestObject: IHaventecAuthenticateResponseObject): void {
+
+        if (!this.getData()) {
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
+        }
+
         // Update Local Storage if required
         if (requestObject.authKey || requestObject.deviceUuid) {
             let localData = this.getData();
@@ -150,6 +180,10 @@ export class HT_DataService {
     }
 
     public purgeUser(): void {
+        if (!this.getData()) {
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
+        }
+
         this.invalidateToken();
         this.removeData();
         this.removeUsername();

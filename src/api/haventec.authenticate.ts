@@ -66,6 +66,13 @@ export class HaventecAuthenticate {
         return this.ht_dataService.getAuthKey();
     }
 
+    public getSalt(): string {
+        return this.ht_dataService.getSalt();
+    }
+    public setSalt(salt: string) {
+        this.ht_dataService.setSalt(salt);
+    }
+
     public clearUserStorage(): void {
         this.ht_dataService.purgeUser();
     }
