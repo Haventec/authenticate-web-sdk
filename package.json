@@ -46,6 +46,6 @@
     }
   ],
   "dependencies": {
-    "@haventec/common-web-sdk": "1.2.7"
+    "@haventec/common-web-sdk": "1.2.8"
   }
 }
