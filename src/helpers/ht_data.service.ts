@@ -190,6 +190,11 @@ export class HT_DataService {
     }
 
     public getHashedPin(pin: string): string {
+
+        if (!this.getData() || !this.getData().saltBits) {
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
+        }
+
         let salt: Array<number>[128] = (<any>this.getData().saltBits).length == 128 ? this.getData().saltBits : JSON.parse(this.getData().saltBits.toString());
         return HaventecCommon.hashPin(pin, salt);
     }

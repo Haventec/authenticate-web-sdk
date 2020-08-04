@@ -18,10 +18,9 @@ describe("HT_DataService", function () {
     let sessionSpy4remove: jasmine.Spy;
     let ht_dataService: HT_DataService;
 
-    beforeAll(() => {
+    beforeAll( () => {
         ht_dataService = new HT_DataService("username");
     });
-    
 
     beforeEach(() => {
         localSpy4set =  spyOn(HT_LocalStorage, 'setItem');
@@ -155,7 +154,30 @@ describe("HT_DataService", function () {
             expect(ht_dataService.getUserUuid()).toBe("XXX");
         } catch(e){
             fail();
-        }    
+        }
     });
 
-}); 
+    it("throws error if data is not set before calling getHashedPin", function () {
+        ht_dataService.purgeUser();
+
+        try{
+            ht_dataService.getHashedPin('1234');
+            fail();
+        } catch(e){
+            expect(e.message).toBe(ErrorMessage.NOT_INITIALISED);
+        }
+    });
+
+    it("calls getHashedPin with success", function () {
+        let activeUser = {"deviceUuid": "deviceUuid1", "username": "username"};
+        localSpy4get.withArgs("ht_username_localdata").and.returnValue(activeUser);
+
+        // the other tests blow away the localdata
+        ht_dataService = new HT_DataService("username");
+
+        const hc_spy = spyOn(HaventecCommon, 'hashPin');
+
+        ht_dataService.getHashedPin('1234');
+        expect(hc_spy).toHaveBeenCalled();
+    });
+});
