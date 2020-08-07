@@ -110,7 +110,17 @@ describe("HT_DataService", function () {
         localSpy4get.and.returnValue(<HT_Data>{"authKey":"XXX"});
         expect(ht_dataService.getAuthKey()).toBe("XXX");
     });
-    
+
+    it("calls and returns value from local storage when salt is requested", function () {
+        localSpy4get.and.returnValue(<HT_Data>{"saltBits":"XXX"});
+        expect(ht_dataService.getSalt()).toBe("XXX");
+    });
+
+    it("calls and sets value to local storage when salt is set", function () {
+        ht_dataService.setSalt("XXX");
+        expect(localSpy4set).toHaveBeenCalled();
+    });
+
     it("throws error if accesstoken is worng while requesting for application-uuid", function () {
         try{
             ht_dataService.getApplicationUuid();
@@ -129,7 +139,7 @@ describe("HT_DataService", function () {
         }    
     });
 
-    it("throws error if accesstoken is worng while requesting for user-uuid", function () {
+    it("throws error if accesstoken is wrong while requesting for user-uuid", function () {
         try{
             ht_dataService.getUserUuid();
             fail();

@@ -49,7 +49,9 @@ Then you can add HaventecAuthenticateProvider to the providers array of the @NgM
 * **getDeviceUuid:** It returns the uuid of the device generated through authenticate.
 * **getUserUuid:** It returns the uuid of the current user.
 
-* **getAuthKey:** It returns the current authKey of the current user from the Storage.
+* **getAuthKey:** It returns the current authKey of the current user from Storage.
+* **getSalt:** It returns the generated salt value for the current user from Storage.
+* **setSalt:** It sets the salt value for the current user to Storage.
 
 * **clearUserStorage:** It clears the entire local and session storage used by the user.
 * **hashPin:** It returns a SHA-512 Hashing of the PIN passed as argument.

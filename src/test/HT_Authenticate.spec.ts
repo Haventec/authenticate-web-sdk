@@ -170,6 +170,18 @@ describe("HT_Authenticate", function () {
         expect(spy).toHaveBeenCalled();
     });
 
+    it("calls the associated function in dataservice for any call to get salt", function () {
+        let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'getSalt');
+        haventecAuthenticate.getSalt();
+        expect(spy).toHaveBeenCalled();
+    });
+
+    it("calls the associated function in dataservice for any call to set salt", function () {
+        let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'setSalt');
+        haventecAuthenticate.setSalt('test salt');
+        expect(spy).toHaveBeenCalled();
+    });
+
 
     it("calls the associated function in dataservice for any call to clear user storage", function () {
         let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'purgeUser');
