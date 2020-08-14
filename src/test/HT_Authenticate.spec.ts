@@ -188,13 +188,6 @@ describe("HT_Authenticate", function () {
         expect(spy).toHaveBeenCalled();
     });
 
-    // it("calls regenerateSalt to generate a new salt value", function () {
-    //     let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'constructor');
-    //     haventecAuthenticate.initialiseStorage('username', true);
-    //     expect(spy).toHaveBeenCalled();
-    // });
-
-
     it("calls the associated function in dataservice for any call to clear user storage", function () {
         let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'purgeUser');
         haventecAuthenticate.clearUserStorage();
