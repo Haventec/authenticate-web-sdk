@@ -6,13 +6,13 @@ export class HaventecAuthenticate {
 
     private ht_dataService: HT_DataService;
 
-    constructor(username?: string) {
-        this.ht_dataService = new HT_DataService(username);
+    constructor(username?: string, newSalt?: boolean) {
+        this.ht_dataService = new HT_DataService(username, newSalt);
     }
 
-    public initialiseStorage(username: string) {
+    public initialiseStorage(username: string, newSalt?: boolean) {
         if (!username) throw  new HT_Error(ErrorCode.HT_AN_PARAM_ERROR, ErrorMessage.INSUFFICIENT_PARAMETERS);
-        this.ht_dataService = new HT_DataService(username);
+        this.ht_dataService = new HT_DataService(username, newSalt);
     }
 
     public updateStorage(requestObject: IHaventecAuthenticateResponseObject): void {
@@ -84,5 +84,9 @@ export class HaventecAuthenticate {
 
     public getDeviceInfo(detailedFingerprint = false): Object {
         return this.ht_dataService.getDeviceInfo(detailedFingerprint);
+    }
+
+    public regenerateSalt() {
+        this.ht_dataService.regenerateSalt();
     }
 }
