@@ -121,6 +121,19 @@ describe("HT_DataService", function () {
         expect(localSpy4set).toHaveBeenCalled();
     });
 
+    it("calls and sets value to local storage when salt is set", function () {
+
+        localSpy4get.and.returnValue(<HT_Data>{"saltBits":"XXX"});
+
+        ht_dataService.regenerateSalt();
+        const salt1 = ht_dataService.getSalt();
+
+        ht_dataService.regenerateSalt();
+        const salt2 = ht_dataService.getSalt();
+
+        expect(salt1 === salt2).toBeFalse();
+    });
+
     it("throws error if accesstoken is worng while requesting for application-uuid", function () {
         try{
             ht_dataService.getApplicationUuid();

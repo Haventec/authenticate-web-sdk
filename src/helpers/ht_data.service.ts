@@ -14,7 +14,7 @@ export class HT_DataService {
     private session_key: string;
     private local_key: string;
 
-    constructor(username?: string) {
+    constructor(username?: string, newSalt?: boolean) {
 
         let localUsername = username;
 
@@ -30,7 +30,7 @@ export class HT_DataService {
 
             this.setUsername(localUsername);
             let data: HT_Data = this.getData();
-            if (!data.saltBits) {
+            if (!data.saltBits || newSalt) {
                 data.saltBits = JSON.stringify(HaventecCommon.generateSalt());
                 this.setData(data);
             }
@@ -142,12 +142,24 @@ export class HT_DataService {
         return this.getData().saltBits;
     }
     public setSalt(salt: string) {
-        if (!this.getData()) {
+        let data: HT_Data = this.getData();
+
+        if (!data) {
             throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
         }
 
-        let data: HT_Data = this.getData();
         data.saltBits = salt;
+        this.setData(data);
+    }
+
+    public regenerateSalt() {
+        let data: HT_Data = this.getData();
+
+        if (!data) {
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
+        }
+
+        data.saltBits = JSON.stringify(HaventecCommon.generateSalt());
         this.setData(data);
     }
 

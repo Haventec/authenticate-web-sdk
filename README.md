@@ -35,7 +35,7 @@ Then you can add HaventecAuthenticateProvider to the providers array of the @NgM
 ## Methods 
 
 
-* **initialiseStorage:** It sets the current user, with data, initialising the salt if not already set. Any existing data is not overridden, so effectively enables use switching
+* **initialiseStorage:** It sets the current user, with data, initialising the salt if not already set. Any existing data is not overridden, so effectively enables use switching. Optionally can regenerate the salt.
 * **updateStorage:** It updates the storage with the object passed as parameter.
 
 * **getDeviceName:** It returns device-name set by default.
@@ -52,6 +52,7 @@ Then you can add HaventecAuthenticateProvider to the providers array of the @NgM
 * **getAuthKey:** It returns the current authKey of the current user from Storage.
 * **getSalt:** It returns the generated salt value for the current user from Storage.
 * **setSalt:** It sets the salt value for the current user to Storage.
+* **regenerateSalt:** It regenerates the salt value for the current user to Storage.
 
 * **clearUserStorage:** It clears the entire local and session storage used by the user.
 * **hashPin:** It returns a SHA-512 Hashing of the PIN passed as argument.
