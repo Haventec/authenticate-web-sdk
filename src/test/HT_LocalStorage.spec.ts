@@ -34,7 +34,7 @@ describe("HT_LocalStorageService", function () {
 
     it("sets data to the local storage and also the map ", function () {
         HT_LocalStorage.setItem("KEY","VALUE");
-        expect(storeSpySet).toHaveBeenCalled();;
+        expect(storeSpySet).toHaveBeenCalled();
     });
 
-}); 
+});
