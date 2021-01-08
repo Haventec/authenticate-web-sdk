@@ -57,7 +57,7 @@ export class HT_DataService {
     private getData(): HT_Data {
         let userLocalData: HT_Data = <HT_Data>HT_LocalStorage.getItem(this.local_key);
         if (userLocalData) return userLocalData;
-        userLocalData = new HT_Data(this.getUsername(), undefined, undefined, undefined, undefined);
+        userLocalData = new HT_Data(this.getUsername(), undefined, undefined, undefined, undefined, undefined);
         this.setData(userLocalData);
         return userLocalData;
     }
@@ -163,6 +163,10 @@ export class HT_DataService {
         this.setData(data);
     }
 
+    public getWebAuthnSupported(): boolean {
+        return this.getData().webAuthnSupported;
+    }
+
     public updateStorage(requestObject: IHaventecAuthenticateResponseObject): void {
 
         if (!this.getData()) {
@@ -170,10 +174,11 @@ export class HT_DataService {
         }
 
         // Update Local Storage if required
-        if (requestObject.authKey || requestObject.deviceUuid) {
+        if (requestObject.authKey || requestObject.deviceUuid || requestObject.webAuthnSupported) {
             let localData = this.getData();
             if (requestObject.authKey) localData.authKey = requestObject.authKey;
             if (requestObject.deviceUuid) localData.deviceUuid = requestObject.deviceUuid;
+            if (requestObject.webAuthnSupported) localData.webAuthnSupported = requestObject.webAuthnSupported;
             localData.dataTime = new Date();
             this.setData(localData);
         }
