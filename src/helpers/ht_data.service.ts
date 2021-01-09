@@ -174,11 +174,11 @@ export class HT_DataService {
         }
 
         // Update Local Storage if required
-        if (requestObject.authKey || requestObject.deviceUuid || !!requestObject.webAuthnSupported) {
+        if (requestObject.authKey || requestObject.deviceUuid || requestObject.webAuthnSupported !== undefined) {
             let localData = this.getData();
             if (requestObject.authKey) localData.authKey = requestObject.authKey;
             if (requestObject.deviceUuid) localData.deviceUuid = requestObject.deviceUuid;
-            if (!!requestObject.webAuthnSupported) localData.webAuthnSupported = requestObject.webAuthnSupported;
+            if (requestObject.webAuthnSupported !== undefined) localData.webAuthnSupported = requestObject.webAuthnSupported;
             localData.dataTime = new Date();
             this.setData(localData);
         }

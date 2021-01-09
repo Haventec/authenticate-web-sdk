@@ -177,6 +177,18 @@ describe("HT_DataService", function () {
         expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, "DEVICE_UUID", "AUTH_KEY", baseTime, true));
     });
 
+    it("doesn't update the localstorage while updating response object if response is missing keys / values", function () {
+        ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "authKey": undefined,  "deviceUuid": undefined, "webAuthnSupported": undefined });
+        expect(localSpy4set).toHaveBeenCalledTimes(1);
+        expect(localSpy4set).not.toHaveBeenCalledTimes(2);
+    });
+
+    it("doesn't update the localstorage while updating response object if response is empty", function () {
+        ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{});
+        expect(localSpy4set).toHaveBeenCalledTimes(1);
+        expect(localSpy4set).not.toHaveBeenCalledTimes(2);
+    });
+    
     it("throws error if accesstoken is wrong while requesting for application-uuid", function () {
         try {
             ht_dataService.getApplicationUuid();
