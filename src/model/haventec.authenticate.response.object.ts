@@ -3,6 +3,7 @@ export interface IHaventecAuthenticateResponseObject {
     authKey: string;
     deviceUuid: string;
     webAuthnSupported: boolean;
+    stepUpToken: string;
 }
 
 interface IToken {
