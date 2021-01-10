@@ -188,7 +188,7 @@ describe("HT_DataService", function () {
         expect(localSpy4set).toHaveBeenCalledTimes(1);
         expect(localSpy4set).not.toHaveBeenCalledTimes(2);
     });
-    
+
     it("throws error if accesstoken is wrong while requesting for application-uuid", function () {
         try {
             ht_dataService.getApplicationUuid();
