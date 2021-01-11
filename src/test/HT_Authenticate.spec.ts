@@ -170,6 +170,12 @@ describe("HT_Authenticate", function () {
         expect(spy).toHaveBeenCalled();
     });
 
+    it("calls the associated function in dataservice for any call to get webAuthnSupported", function () {
+        let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'getWebAuthnSupported');
+        haventecAuthenticate.getWebAuthnSupported();
+        expect(spy).toHaveBeenCalled();
+    });
+
     it("calls the associated function in dataservice for any call to get salt", function () {
         let spy = spyOn((<any>haventecAuthenticate).ht_dataService, 'getSalt');
         haventecAuthenticate.getSalt();

@@ -73,6 +73,10 @@ export class HaventecAuthenticate {
         this.ht_dataService.setSalt(salt);
     }
 
+    public getWebAuthnSupported(): boolean {
+        return this.ht_dataService.getWebAuthnSupported();
+    }
+
     public clearUserStorage(): void {
         this.ht_dataService.purgeUser();
     }
