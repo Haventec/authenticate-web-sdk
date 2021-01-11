@@ -183,6 +183,12 @@ describe("HT_DataService", function () {
         expect(localSpy4set).not.toHaveBeenCalledTimes(2);
     });
 
+    it("should throw an error", function () {
+        ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "authKey": undefined,  "deviceUuid": undefined, "webAuthnSupported": undefined });
+        expect(localSpy4set).toHaveBeenCalledTimes(1);
+        expect(localSpy4set).not.toHaveBeenCalledTimes(2);
+    });
+
     it("doesn't update the localstorage while updating response object if response is empty", function () {
         ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{});
         expect(localSpy4set).toHaveBeenCalledTimes(1);
