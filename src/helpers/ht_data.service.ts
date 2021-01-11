@@ -55,6 +55,10 @@ export class HT_DataService {
     }
 
     private getData(): HT_Data {
+        let username = this.getUsername();
+        if(!username){
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.INVALID_OBJECT);
+        }
         let userLocalData: HT_Data = <HT_Data>HT_LocalStorage.getItem(this.local_key);
         if (userLocalData) return userLocalData;
         userLocalData = new HT_Data(this.getUsername(), undefined, undefined, undefined, undefined, undefined);
@@ -167,7 +171,7 @@ export class HT_DataService {
         if (!this.getData()) {
             throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
         }
-        
+
         return this.getData().webAuthnSupported;
     }
 
