@@ -164,6 +164,10 @@ export class HT_DataService {
     }
 
     public getWebAuthnSupported(): boolean {
+        if (!this.getData()) {
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
+        }
+        
         return this.getData().webAuthnSupported;
     }
 
