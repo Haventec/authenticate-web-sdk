@@ -57,6 +57,7 @@ Then you can add HaventecAuthenticateProvider to the providers array of the @NgM
 * **clearUserStorage:** It clears the entire local and session storage used by the user.
 * **hashPin:** It returns a SHA-512 Hashing of the PIN passed as argument.
 * **getDeviceInfo:** It returns the information about device including the fingerprint.
+* **getWebAuthnSupported:** It returns the webAuthnSupported status of the user from Storage.
 
 
 ## Development
