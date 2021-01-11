@@ -2,7 +2,7 @@ import { HT_DataService } from '../helpers/ht_data.service';
 import HT_LocalStorage from '../storage/ht_local.storage.service';
 import HaventecCommon from '@haventec/common-web-sdk';
 import HT_SessionStorage from '../storage/ht_session.storage.service';
-import { ErrorMessage } from '../model/error';
+import {ErrorCode, ErrorMessage} from '../model/error';
 import { HT_Session_Data } from '../model/htsessiondata';
 import { HT_Data } from '../model/htdata';
 import { HT_TokenService } from '../helpers/ht_token.service';
@@ -183,10 +183,21 @@ describe("HT_DataService", function () {
         expect(localSpy4set).not.toHaveBeenCalledTimes(2);
     });
 
-    it("should throw an error", function () {
-        ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "authKey": undefined,  "deviceUuid": undefined, "webAuthnSupported": undefined });
-        expect(localSpy4set).toHaveBeenCalledTimes(1);
-        expect(localSpy4set).not.toHaveBeenCalledTimes(2);
+    it("should throw an error on getData() if username is not present", function () {
+        let userNameSpy = spyOn(ht_dataService, "getUsername").and.returnValue(undefined);
+        try {
+            ht_dataService.getWebAuthnSupported();
+        } catch (e) {
+            expect(e.errorCode).toBe(ErrorCode.HT_AN_NOT_INITIALISED);
+            expect(e.message).toBe(ErrorMessage.INVALID_OBJECT);
+        }
+        userNameSpy.and.returnValue('USER_NAME');
+        try {
+            ht_dataService.getWebAuthnSupported();
+        } catch (e) {
+            expect(e.errorCode).toBe(ErrorCode.HT_AN_NOT_INITIALISED);
+            expect(e.message).toBe(ErrorMessage.NOT_INITIALISED);
+        }
     });
 
     it("doesn't update the localstorage while updating response object if response is empty", function () {
