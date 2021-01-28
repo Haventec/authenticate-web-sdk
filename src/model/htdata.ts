@@ -6,7 +6,8 @@ export class HT_Data {
         public deviceUuid: string,
         public authKey: string,
         public dataTime: Date,
-        public webAuthnSupported: boolean
+        public webAuthnSupported: boolean,
+        public webAuthnDeviceUuid: string
     )
     {
 

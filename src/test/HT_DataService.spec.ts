@@ -150,35 +150,41 @@ describe("HT_DataService", function () {
     it("updates the localstorage while updating response object with authKey only", function () {
         ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "authKey": "AUTH_KEY" });
         expect(localSpy4get).toHaveBeenCalled();
-        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, undefined, "AUTH_KEY", baseTime, undefined));
+        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, undefined, "AUTH_KEY", baseTime, undefined, undefined));
     });
 
     it("updates the localstorage while updating response object with deviceUuid only", function () {
         ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "deviceUuid": "DEVICE_UUID" });
         expect(localSpy4get).toHaveBeenCalled();
-        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, "DEVICE_UUID", undefined, baseTime, undefined));
+        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, "DEVICE_UUID", undefined, baseTime, undefined, undefined));
     });
 
     it("updates the localstorage while updating response object with webAuthnSupported = true only", function () {
         ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "webAuthnSupported": true });
         expect(localSpy4get).toHaveBeenCalled();
-        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, undefined, undefined, baseTime, true));
+        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, undefined, undefined, baseTime, true, undefined));
     });
 
     it("updates the localstorage while updating response object with webAuthnSupported = false only", function () {
         ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "webAuthnSupported": false });
         expect(localSpy4get).toHaveBeenCalled();
-        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, undefined, undefined, baseTime, false));
+        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, undefined, undefined, baseTime, false, undefined));
     });
 
-    it("updates the localstorage while updating response object with all possible response values only", function () {
-        ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "authKey": "AUTH_KEY",  "deviceUuid": "DEVICE_UUID", "webAuthnSupported": true });
+    it("updates the localstorage while updating response object with webAuthnDeviceUuid only", function () {
+        ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "webAuthnDeviceUuid": "WEBAUTHN_DEVICE_UUID" });
         expect(localSpy4get).toHaveBeenCalled();
-        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, "DEVICE_UUID", "AUTH_KEY", baseTime, true));
+        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, undefined, undefined, baseTime, undefined, "WEBAUTHN_DEVICE_UUID"));
+    });
+    
+    it("updates the localstorage while updating response object with all possible response values only", function () {
+        ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "authKey": "AUTH_KEY",  "deviceUuid": "DEVICE_UUID", "webAuthnSupported": true, "webAuthnDeviceUuid": "WEBAUTHN_DEVICE_UUID" });
+        expect(localSpy4get).toHaveBeenCalled();
+        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, "DEVICE_UUID", "AUTH_KEY", baseTime, true, undefined));
     });
 
     it("doesn't update the localstorage while updating response object if response is missing keys / values", function () {
-        ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "authKey": undefined,  "deviceUuid": undefined, "webAuthnSupported": undefined });
+        ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "authKey": undefined,  "deviceUuid": undefined, "webAuthnSupported": undefined, "webAuthnDeviceUuid": undefined });
         expect(localSpy4set).toHaveBeenCalledTimes(1);
         expect(localSpy4set).not.toHaveBeenCalledTimes(2);
     });
