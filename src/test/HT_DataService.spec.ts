@@ -180,7 +180,7 @@ describe("HT_DataService", function () {
     it("updates the localstorage while updating response object with all possible response values only", function () {
         ht_dataService.updateStorage(<IHaventecAuthenticateResponseObject>{ "authKey": "AUTH_KEY",  "deviceUuid": "DEVICE_UUID", "webAuthnSupported": true, "webAuthnDeviceUuid": "WEBAUTHN_DEVICE_UUID" });
         expect(localSpy4get).toHaveBeenCalled();
-        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, "DEVICE_UUID", "AUTH_KEY", baseTime, true, undefined));
+        expect(localSpy4set).toHaveBeenCalledWith("ht_username_localdata", new HT_Data("username", undefined, "DEVICE_UUID", "AUTH_KEY", baseTime, true, "WEBAUTHN_DEVICE_UUID"));
     });
 
     it("doesn't update the localstorage while updating response object if response is missing keys / values", function () {
