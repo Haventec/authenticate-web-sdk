@@ -62,6 +62,10 @@ export class HaventecAuthenticate {
         return this.ht_dataService.getUserUuid();
     }
 
+    public getWebAuthnDeviceUuid(): string {
+        return this.ht_dataService.getWebAuthnDeviceUuid();
+    }
+
     public getAuthKey(): string {
         return this.ht_dataService.getAuthKey();
     }

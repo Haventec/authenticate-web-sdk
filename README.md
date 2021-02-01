@@ -48,6 +48,7 @@ Then you can add HaventecAuthenticateProvider to the providers array of the @NgM
 
 * **getDeviceUuid:** It returns the uuid of the device generated through authenticate.
 * **getUserUuid:** It returns the uuid of the current user.
+* **getWebAuthnDeviceUuid:** It returns the uuid of the authenticator for the validated webAuthn credential of the current user.
 
 * **getAuthKey:** It returns the current authKey of the current user from Storage.
 * **getSalt:** It returns the generated salt value for the current user from Storage.
