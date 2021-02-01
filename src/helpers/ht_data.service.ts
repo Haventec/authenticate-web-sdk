@@ -61,7 +61,7 @@ export class HT_DataService {
         if(!username){
             throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.INVALID_OBJECT);
         }
-        userLocalData = new HT_Data(this.getUsername(), undefined, undefined, undefined, undefined, undefined);
+        userLocalData = new HT_Data(this.getUsername(), undefined, undefined, undefined, undefined, undefined, undefined);
         this.setData(userLocalData);
         return userLocalData;
     }
@@ -116,6 +116,14 @@ export class HT_DataService {
         }
 
         return this.getData().deviceUuid;
+    }
+
+    public getWebAuthnDeviceUuid(): string {
+        if (!this.getData()) {
+            throw new HT_Error(ErrorCode.HT_AN_NOT_INITIALISED, ErrorMessage.NOT_INITIALISED);
+        }
+
+        return this.getData().webAuthnDeviceUuid;
     }
 
     public getUserUuid(): string {
@@ -182,11 +190,12 @@ export class HT_DataService {
         }
 
         // Update Local Storage if required
-        if (requestObject.authKey || requestObject.deviceUuid || requestObject.webAuthnSupported !== undefined) {
+        if (requestObject.authKey || requestObject.deviceUuid || requestObject.webAuthnSupported !== undefined || requestObject.webAuthnDeviceUuid) {
             let localData = this.getData();
             if (requestObject.authKey) localData.authKey = requestObject.authKey;
             if (requestObject.deviceUuid) localData.deviceUuid = requestObject.deviceUuid;
             if (requestObject.webAuthnSupported !== undefined) localData.webAuthnSupported = requestObject.webAuthnSupported;
+            if (requestObject.webAuthnDeviceUuid) localData.webAuthnDeviceUuid = requestObject.webAuthnDeviceUuid;
             localData.dataTime = new Date();
             this.setData(localData);
         }
